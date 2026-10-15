@@ -8,7 +8,7 @@
 4. Không sử dụng ứng dụng để gửi nội dung vi phạm pháp luật hoặc cố ý làm sai lệch dữ liệu của lab.
 5. Lab có thể thay đổi hoặc ngừng ứng dụng bất kỳ lúc nào.
 
-Liên hệ: <EMAIL_LIEN_HE>
+Liên hệ: 23070247@vnu.edu.vn
 
 ---
 

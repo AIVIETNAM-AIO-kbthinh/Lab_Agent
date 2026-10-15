@@ -7,4 +7,4 @@ ISILab Assistant is an internal AI agent system of ISILab: a Q&A chatbot about t
 - [Chính sách quyền riêng tư / Privacy Policy](privacy.html)
 - [Điều khoản sử dụng / Terms of Service](terms.html)
 
-Liên hệ / Contact: <EMAIL_LIEN_HE>
+Liên hệ / Contact: 23070247@vnu.edu.vn
