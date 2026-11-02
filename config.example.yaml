@@ -1,0 +1,283 @@
+# Cấu hình của MỘT lab. Thứ tự ưu tiên: biến môi trường (.env) > file này > mặc định trong code.
+# Bí mật (key, mật khẩu, token) KHÔNG đặt ở đây — xem .env.example.
+# Kiểm tra sau khi sửa: `labagent preflight` (in giá trị cuối cùng kèm nguồn env/yaml/default).
+
+timezone: Asia/Ho_Chi_Minh
+
+lab:
+  id: isilab
+  name: "ISI Lab - Intelligent System and IoT Laboratory"
+  # ghi đè bằng LAB_WEBSITE_URL
+  website: "http://isilab.click/"
+  advisor_name: "Thầy Nguyễn Đăng Khoa"   # thầy phụ trách (không nằm trong Members); dùng cho "Chủ trì" biên bản
+
+# Giai đoạn test: mọi thành viên dùng chung 1 email, dữ liệu là dữ liệu giả.
+test_mode: true
+test:
+  dev_login: true                  # màn hình đăng nhập cho chọn "đăng nhập với tư cách <họ tên>"
+  # Cô lập xác thực khi đang hoàn thiện tính năng: không cần đăng nhập, chọn vai trò ngay trên giao diện chat.
+  # Tắt (false) khi cần test lại luồng đăng nhập/tạo tài khoản/phân loại member–guest. Production từ chối chạy nếu bật.
+  auth_bypass: false
+  bypass_role: member              # vai trò mặc định khi chưa chọn: guest | member | thu_ki | leader | admin
+  subject_prefix: "[TEST]"
+  show_intended_recipient: true    # dòng đầu mail: "Người nhận dự kiến: <họ tên>"
+
+drive:
+  root_folder_id: "YOUR_DRIVE_ROOT_FOLDER_ID"   # ID thư mục gốc của lab trên Drive
+
+auth:
+  # Mỗi admin một tài khoản (thầy hướng dẫn, dev); không cần có trong Members. ho_ten dùng khi
+  # mượn thiết bị, ghi AuditLog. Admin có toàn quyền.
+  admins: []                       # vd: - {email: thay@vnu.edu.vn, ho_ten: "Nguyễn Văn Thầy"}
+  session_idle_days: 7
+  session_max_days: 30
+  login_max_failures: 5
+  login_lock_minutes: 15
+  password_min_length: 10
+  role_cache_seconds: 60
+  login_url: null                  # vd https://lab.example.com/login (ghi trong mail mật khẩu tạm)
+
+email:
+  sender: null                     # email tài khoản lab; null = "me" (tài khoản OAuth)
+  allowed_domains: [gmail.com, vnu.edu.vn]
+  alert_recipients: []             # rỗng = gửi auth.admins
+
+upload:
+  max_mb: 10
+  allowed_types: [pdf, docx]
+
+# ---------------------------------------------------------------
+# Ánh xạ sheet: code đọc/ghi theo TIÊU ĐỀ CỘT, không theo vị trí cột.
+# So khớp tiêu đề sau khi chuẩn hoá NFC, gộp khoảng trắng, không phân biệt hoa thường.
+# ---------------------------------------------------------------
+sheets:
+  members:
+    path: data/Members
+    tab: null                      # null = tab đầu tiên
+    header_row: 3
+    columns:
+      mssv: "Student ID"
+      ho_ten: "Name"               # KHOÁ liên kết với DutySchedule và LichSuMuon
+      lop: "Lớp"
+      sdt: "Phone"
+      truong: "University"
+      email: "Email"
+      role: "Role"
+    never_expose: ["Address", "No"]
+    role_values: {Leader: leader, Secretary: thu_ki, Member: member}
+    role_labels: {leader: Leader, thu_ki: "Thư ký", member: "Thành viên"}
+    former_tab: "Cựu thành viên"
+
+  equipment:
+    path: data/Equipment
+    devices:
+      tab: Thietbi
+      header_row: 1
+      columns:
+        ma_tb: "Mã thiết bị"
+        ten_tb: "Thiết bị"
+        tinh_trang: "Trạng thái hoạt động"
+        tong_so_luong: "Số lượng"
+        ghi_chu: "Ghi chú"
+        nguoi_muon: "Người mượn"
+        con_lai: "Còn lại"        # code ghi lại sau mỗi lần mượn/trả (không có cột này thì bỏ qua)
+      tinh_trang_values: ["Tốt", "Hỏng nhẹ", "Hỏng", "Mất"]
+      not_borrowable: ["Hỏng", "Mất"]
+    borrows:
+      tab: LichSuMuon
+      header_row: 1
+      columns:
+        ngay_muon: "Thời gian"
+        ho_ten: "Tên người mượn"
+        ten_tb: "thiết bị mượn"
+        tinh_trang_khi_muon: "trạng thái"
+        han_tra: "Hạn trả"
+        ngay_tra: "ngày trả"
+        tinh_trang_khi_tra: "trạng thái sau trả"
+        ghi_chu: "Ghi chú"
+        ma_tb: "Mã thiết bị"
+        so_luong: "Số lượng"
+        ma_phieu: "Mã phiếu"
+        link_phieu: "Link phiếu"
+      date_format: "%d/%m/%Y"
+      default_so_luong: 1
+
+  duty:
+    path: data/DutySchedule
+    template_path: templates/LichTrucTuan
+    template_tab: null
+    tab_name_format: "{start:%d/%m}-{end:%d/%m}"
+    title_cell: A1
+    title_format: "LỊCH TRỰC LAB TUẦN TỪ {start:%d/%m} - {end:%d/%m}"
+    day_header_row: 4
+    slot_header_row: 5
+    first_member_row: 7
+    no_col: A
+    name_col: B
+    worklog_header: "Nội dung công việc đang thực hiện"
+    count_header: "Số buổi trực lab"
+    slot_labels: ["Sáng", "Chiều"]
+    marks_counted: [V, T]
+    fixed_mark: T
+    copy_fixed_from_prev: false    # true = chép ô T tuần này sang tuần sau; false = agent tự giao T
+    registrations_per_t: 3         # chỉ tiêu T = số buổi đăng ký / 3 (làm tròn, ≥1): 3→1, 5-6→2, 8-9→3
+    min_sessions_per_week: 3
+
+  form_submissions: {path: data/FormSubmissions}
+  audit_log: {path: data/AuditLog, tab: null}
+
+drafts:
+  ttl_hours: 24                    # bản nháp đơn quá hạn bị từ chối và xoá
+  confirm_wait_s: 30               # nút Xác nhận chờ worker ghi xong tối đa (giây)
+  keep_after_submit_days: 7
+  pending_action_ttl_hours: 24     # yêu cầu chờ bấm xác nhận (trả/gia hạn thiết bị, duyệt đơn, đổi role)
+  blank_link_ttl_minutes: 120      # hạn link tải đơn trống
+
+# Xuất file theo yêu cầu qua chat (danh sách thành viên, thiết bị, thiết bị đang mượn...): Excel hoặc CSV
+exports:
+  ttl_minutes: 60                  # link tải chỉ dùng được trong phiên đã yêu cầu, hết hạn sau N phút
+  max_rows: 5000                   # vượt quá thì nhờ người dùng lọc hẹp hơn
+  max_files: 30                    # xuất đơn đã nộp (DOCX, nhiều đơn thì nén ZIP): tối đa số đơn mỗi lần
+
+# Form engine: schema viết tay ở P3 nằm trong `schemas/`; `labagent forms publish` chèn placeholder vào bản sao
+# template và đưa lên templates/_system/<form_id>/v<ngày>/ trên Drive.
+forms:
+  schemas_dir: schemas
+  system_folder: templates/_system
+  # P4 — admin gửi mẫu đơn mới qua chat → agent tẩy trắng, sinh schema, admin bấm Kích hoạt
+  templates_folder: templates            # mẫu trắng lưu ở đây (nút "Tải mẫu" cho member)
+  submissions_folder: submissions        # đơn nộp theo mẫu mới: submissions/<form_id>/<YYYY-MM>/
+  review_ttl_hours: 72                   # bản duyệt chưa kích hoạt quá hạn này bị xoá
+  default_roles: [member, thu_ki, leader]
+
+applications:
+  rejected_retention_months: 6
+
+index:
+  drive_poll_minutes: 15
+  chunk_tokens: 700
+  chunk_overlap: 0.12
+  kb_public_path: kb/public
+  kb_internal_path: kb/internal
+
+schedule:
+  kb_sync:            "*/15 * * * *"
+  duty_create:        "0 18 * * FRI"
+  weekly_report:      "0 20 * * SUN"
+  duty_remind:        "0 22 * * SUN"
+  equipment_reminder: "0 8 * * *"
+  kb_reconcile:       "0 23 * * SUN"
+  draft_cleanup:      "0 3 * * *"
+  health:             "30 7 * * *"
+  data_retention:     "15 3 * * *"
+  retention:          "0 4 1 * *"         # đơn gia nhập bị từ chối quá hạn → _archive/
+  web_crawl_quick:    "0 2 * * *"
+  web_crawl_full:     "0 3 * * MON"
+
+equipment:
+  overdue_reminder_every_days: 3
+
+notifications:
+  duty_deadline: "hết Chủ nhật {sunday:%d/%m}"   # hạn đăng ký lịch trực ghi trong mail; {sunday} = CN trước tuần trực
+  weekly_report_to: [leader, thu_ki]             # leader | thu_ki — email tra trong Members lúc chạy
+
+# ---------------------------------------------------------------
+# LLM qua gateway. Model từng vai trò có thể ghi đè bằng LLM_MODEL_* trong .env.
+# ---------------------------------------------------------------
+llm:
+  request_timeout_s: 60
+  first_token_timeout_s: 15
+  max_tool_iterations: 8
+  tool_timeout_s: 20
+  profiles:
+    member_agent: {model: claude-haiku-4-5-20251001, max_tokens: 4000}
+    guest_agent:  {model: gemini-3.1-flash-lite, max_tokens: 2000}
+    extract:      {model: claude-sonnet-5-5, effort: low, max_tokens: 4000}
+    schema_gen:   {model: claude-opus-5-5, effort: high, max_tokens: 16000}
+  fallback:
+    anthropic: gemini-2.5-flash                 # LLM_FALLBACK_CLAUDE
+    openai_compat: claude-haiku-4-5-20251001    # LLM_FALLBACK_OPENAI_COMPAT
+  # adapter + tham số được phép gửi + giá (USD / 1M token) để tính chi phí
+  model_capabilities:
+    claude-sonnet-5-5:         {adapter: anthropic, effort: true,  strict_tools: true, price_in: 2.0, price_out: 10.0}
+    claude-opus-5-5:           {adapter: anthropic, effort: true,  strict_tools: true, price_in: 4.0, price_out: 20.0}
+    claude-haiku-4-5-20251001: {adapter: anthropic, effort: false, strict_tools: true, price_in: 1.0, price_out: 5.0}
+    gemini-3.1-flash-lite:     {adapter: openai_compat, strict_tools: false, price_in: 0.4, price_out: 2.4}
+    gemini-2.5-flash:          {adapter: openai_compat, strict_tools: false, price_in: 0.64, price_out: 5.34}
+  budgets:
+    max_input_chars_per_message: 4000
+    guest_tokens_per_session_per_day: 200000   # điền một đơn qua chat ≈ 60k token
+    member_tokens_per_user_per_day: 400000
+    lab_usd_per_month_alert: 30
+    lab_usd_per_month_hard_stop: 60
+
+embedding: {model: text-embedding-3-large, dimensions: 1024, batch_size: 64, price_per_m: 0.156}
+rerank:    {enabled: true, model: qwen3-rerank, candidates: 30, top_n: 6, timeout_s: 10}
+
+qdrant:
+  collection_prefix: kb            # collection = <prefix>_<model viết tắt>_<dim>, truy cập qua alias <prefix>_<lab.id>
+
+# ---------------------------------------------------------------
+# Website lab: nội dung lưu trong backend (bảng web_pages + Qdrant), không đưa vào Drive.
+# ---------------------------------------------------------------
+web_sources:
+  - id: isilab_site
+    base_url: null                 # null = lab.website
+    langs: {param: lang, values: [vi, en]}
+    seeds: ["/", "/research", "/members", "/projects", "/publications", "/news", "/contact"]
+    listing_pages: ["/news", "/projects", "/publications", "/members"]
+    include: ['^/$', '^/(research|members|projects|publications|news|contact)(/.*)?$']
+    exclude: ['^/admin', '^/public/', '^/gallery', '^/uploads/']
+    max_pages: 400
+    max_depth: 4
+    rate_per_sec: 1
+    timeout_s: 20
+    sitemap: null
+    min_content_chars: 40            # chỉ bắt trang gần như trống; trang thành viên thật chỉ ~70 ký tự
+    soft_404_patterns: ["page not found", "không tìm thấy trang", "does not exist or has been moved"]
+    # loại bỏ khối giao diện khi trích nội dung chính (tag và mẫu class CSS)
+    drop_tags: [nav, footer, script, style, form, canvas, svg, noscript, button, iframe]
+    drop_class_patterns: ["stat", "counter", "cursor-glow", "crumbs", "member-social", "lang-toggle"]
+    delete_after_missing_runs: 2
+    max_change_ratio: 0.30
+    recent_days: 30
+    access: public
+    bot_contact: null              # email admin ghi vào User-Agent
+    # Bản tiếng Việt của website vẫn để tiêu đề mục bằng tiếng Anh: thêm tên tiếng Việt khi index để câu hỏi
+    # tiếng Việt ("liên hệ", "lĩnh vực nghiên cứu", "dự án nổi bật") khớp tốt hơn. Không đổi nội dung gốc.
+    heading_aliases:
+      vi:
+        "Intelligent System & IoT Laboratory": "Trang chủ - Phòng thí nghiệm Hệ thống thông minh và IoT"
+        "Research Areas": "Lĩnh vực nghiên cứu"
+        "Featured Projects": "Dự án nổi bật"
+        "Meet the Team": "Thành viên của lab"
+        "News & Activities": "Tin tức và hoạt động"
+        "Publications": "Công bố khoa học"
+        "Contact Us": "Liên hệ, địa chỉ, giờ làm việc"
+
+security:
+  cookie_secure: null              # null = true khi APP_ENV=production
+  guest_msgs_per_session_hour: 20
+  guest_msgs_per_ip_hour: 60
+  member_msgs_per_hour: 120
+  login_attempts_per_ip_15min: 30
+  trusted_proxies: ["127.0.0.1"]
+  metrics_allow_cidrs: ["127.0.0.0/8", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+
+render:
+  soffice_path: null               # null = tự tìm LibreOffice; không có thì bản xem trước là DOCX
+  max_concurrency: 1
+  timeout_s: 60
+
+retention:
+  conversation_days: 30
+  upload_hours: 24
+  web_snapshots_keep: 5
+
+worker:
+  poll_interval_s: 2
+  outbox_max_attempts: 6
+  advisory_lock_key: 42001
+
+paths:
+  var_dir: var

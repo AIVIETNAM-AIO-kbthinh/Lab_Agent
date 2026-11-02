@@ -1,0 +1,22 @@
+Subject: [{{ lab_name }}] Mở đăng ký lịch trực tuần {{ week_label }}
+Chào {{ name }},
+
+Lịch trực lab tuần {{ week_label }} đã mở. Bạn vui lòng đánh "V" vào các buổi bạn CÓ THỂ lên trực (tối thiểu {{ min_sessions }} buổi) tại đây:
+{{ link }}
+
+Sau hạn đăng ký, hệ thống sẽ tự giao buổi trực chính thức bằng cách đổi một số ô "V" thành "{{ fixed_mark }}":
+mỗi người có ít nhất 1 buổi "{{ fixed_mark }}", đăng ký nhiều buổi thì được giao nhiều buổi "{{ fixed_mark }}" hơn,
+mỗi buổi có ít nhất 1 người trực "{{ fixed_mark }}". Bạn không cần tự điền "{{ fixed_mark }}".
+{% if fixed %}
+Bạn đang có {{ fixed|length }} buổi đã được giao "{{ fixed_mark }}":
+{% for s in fixed %}
+- {{ s }}
+{% endfor %}
+{% endif %}
+{% if missing_row %}
+Lưu ý: tên bạn chưa có trong tab lịch trực tuần này. Bạn vui lòng báo leader thêm tên vào trước khi đăng ký.
+{% endif %}
+
+Hạn đăng ký: {{ deadline }}.
+
+Mail tự động từ hệ thống Lab Agent.

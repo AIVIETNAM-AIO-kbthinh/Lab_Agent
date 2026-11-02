@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quản trị</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/common.js" defer></script>
+  <script src="/static/admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">●</span> Quản trị</div>
+    <div class="who"><a href="/">← Chat</a></div>
+  </header>
+  <main class="admin">
+    <p id="msg" role="alert"></p>
+
+    <section class="panel admin-only" hidden>
+      <h2>Chi phí LLM</h2>
+      <div id="costs" class="kpis"></div>
+      <table><thead><tr><th>Profile</th><th>Model</th><th>Lượt</th><th>Token vào</th><th>Token ra</th><th>Cache đọc</th>
+        <th>USD</th><th>Token đầu TB (ms)</th></tr></thead><tbody id="cost-rows"></tbody></table>
+    </section>
+
+    <section class="panel admin-only" hidden>
+      <h2>Website lab (KB web)</h2>
+      <div class="row">
+        <button id="crawl-quick">Cập nhật ngay (nhanh)</button>
+        <button id="crawl-full" class="secondary">Crawl đầy đủ</button>
+        <select id="filter"><option value="">Mọi trạng thái</option><option>active</option><option>missing</option>
+          <option>deleted</option></select>
+      </div>
+      <h3>Các lần chạy gần đây</h3>
+      <table><thead><tr><th>#</th><th>Kiểu</th><th>Trạng thái</th><th>Bắt đầu</th><th>Thống kê</th><th></th></tr></thead>
+        <tbody id="runs"></tbody></table>
+      <h3>Trang đã crawl <span id="page-count"></span></h3>
+      <table><thead><tr><th>URL</th><th>Ngôn ngữ</th><th>Tiêu đề</th><th>Trạng thái</th><th>Lần tải cuối</th>
+        <th>Lần đổi cuối</th><th>Mất</th><th>Chunk</th></tr></thead><tbody id="pages"></tbody></table>
+    </section>
+
+    <section class="panel leader-admin" hidden>
+      <h2>Mẫu đơn</h2>
+      <p class="hint">Thêm mẫu mới: gửi file .docx trong khung chat và nhờ trợ lý "thêm mẫu đơn này vào hệ thống".</p>
+      <table><thead><tr><th>Mã đơn</th><th>Tên</th><th>Phiên bản</th><th>Trạng thái</th><th>Ai dùng</th><th>Số trường</th>
+        <th></th></tr></thead><tbody id="forms"></tbody></table>
+      <p id="pending-templates" class="hint"></p>
+    </section>
+
+    <section class="panel admin-only" hidden>
+      <h2>Thao tác ghi thất bại (outbox FAILED)</h2>
+      <table><thead><tr><th>Op</th><th>Loại</th><th>Lần thử</th><th>Người tạo</th><th>Lỗi</th></tr></thead>
+        <tbody id="ops"></tbody></table>
+    </section>
+
+    <section class="panel admin-only" hidden>
+      <h2>Tài khoản</h2>
+      <p class="hint">Chỉ tạo được cho email có trong Members hoặc trong danh sách admin. Đổi vai trò: sửa cột Role
+        trong Members (hoặc nhờ trợ lý trong chat).</p>
+      <form id="acc-form" class="row"><input id="acc-email" type="email" placeholder="email@..." required>
+        <button type="submit">Tạo tài khoản</button></form>
+      <table><thead><tr><th>Email</th><th>Người dùng</th><th>Trạng thái</th><th>Đăng nhập cuối</th><th></th></tr></thead>
+        <tbody id="accounts"></tbody></table>
+    </section>
+
+    <section class="panel admin-only" hidden>
+      <h2>Nhật ký thao tác (AuditLog)</h2>
+      <p class="hint">Chỉ xem. AuditLog không ai sửa được, kể cả admin.</p>
+      <form id="audit-form" class="row"><input id="audit-q" type="search" placeholder="Lọc theo người, đối tượng, chi tiết...">
+        <button type="submit" class="secondary">Lọc</button></form>
+      <table><thead><tr><th>Thời gian</th><th>Người làm</th><th>Vai trò</th><th>Thao tác</th><th>Đối tượng</th><th>Kết quả</th>
+        <th>Chi tiết</th></tr></thead><tbody id="audit"></tbody></table>
+    </section>
+  </main>
+</body>
+</html>

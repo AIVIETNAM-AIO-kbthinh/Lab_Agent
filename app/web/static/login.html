@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/common.js" defer></script>
+  <script src="/static/login.js" defer></script>
+</head>
+<body class="center">
+  <main class="card">
+    <h1 id="lab-name">Đăng nhập</h1>
+
+    <form id="login-form">
+      <label>Email <input id="email" type="email" autocomplete="username" required></label>
+      <label>Mật khẩu <input id="password" type="password" autocomplete="current-password" required></label>
+      <button type="submit">Đăng nhập</button>
+      <p class="hint">Tài khoản do admin của lab cấp. Quên mật khẩu? Liên hệ admin để đặt lại.</p>
+    </form>
+
+    <form id="change-form" hidden>
+      <p class="hint">Bạn cần đặt mật khẩu mới (tối thiểu 10 ký tự, không dùng mật khẩu phổ biến).</p>
+      <label>Mật khẩu hiện tại <input id="old-password" type="password" autocomplete="current-password" required></label>
+      <label>Mật khẩu mới <input id="new-password" type="password" autocomplete="new-password" minlength="10" required></label>
+      <label>Nhập lại <input id="new-password2" type="password" autocomplete="new-password" minlength="10" required></label>
+      <button type="submit">Đổi mật khẩu</button>
+    </form>
+
+    <section id="dev-login" hidden>
+      <h2>Đăng nhập thử (chế độ TEST)</h2>
+      <p class="hint">Chọn thành viên để đăng nhập với tư cách người đó.</p>
+      <div class="row"><select id="dev-name"></select><button id="dev-btn" type="button">Vào</button></div>
+    </section>
+
+    <p id="msg" class="error" role="alert"></p>
+    <p><a href="/">← Về trang chat</a></p>
+  </main>
+</body>
+</html>

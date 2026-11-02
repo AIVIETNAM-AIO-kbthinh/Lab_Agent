@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members | ISI Lab</title>
+    <meta name="description" content="ISI Lab - Intelligent System and IoT Laboratory at VNU International School. Research in AI, IoT, Robotics, UAV, and Automation.">
+    <link rel="icon" type="image/png" href="/public/assets/logo-light.png">
+    <link rel="shortcut icon" href="/public/assets/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/site.css">
+
+    <meta name="csrf-token" content="497245dffee372afe328514f9865849365fe99d5492095216724c503d0a17702">
+</head>
+<body class="page-members">
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="ISI Lab Home">
+                <img src="/public/assets/logo-light.png" alt="ISI Lab" class="header-logo-img logo-light">
+                <img src="/public/assets/logo-dark.png" alt="ISI Lab" class="header-logo-img logo-dark">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/"             class="nav-link "         data-i18n="nav.home">Home</a></li>
+                <li><a href="/research"     class="nav-link "     data-i18n="nav.research">Research</a></li>
+                <li><a href="/members"      class="nav-link active"      data-i18n="nav.members">Members</a></li>
+                <li><a href="/projects"     class="nav-link "     data-i18n="nav.projects">Projects</a></li>
+                <li><a href="/publications" class="nav-link " data-i18n="nav.publications">Publications</a></li>
+                <li><a href="/news"         class="nav-link "         data-i18n="nav.news">News</a></li>
+                <li><a href="/gallery"      class="nav-link "      data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="/contact"      class="nav-link "      data-i18n="nav.contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="lang-toggle" id="langSwitch" href="/members?lang=en" title="Switch to English" aria-label="Switch to English">
+                    <span class="lang-current">VI</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-hero">
+    <div class="container">
+        <div class="crumbs">Trang chủ / Thành viên</div>
+        <h1 data-i18n="members.title">Meet the Team</h1>
+        <p class="subtitle" data-i18n="members.subtitle">Brilliant minds working together</p>
+    </div>
+</section>
+
+<section class="section section-members" style="padding-top:50px">
+    <div class="container">
+        <div class="members-tabs" data-aos="fade-up">
+            <button class="member-tab active" data-filter="all"      data-i18n="members.tab1">All</button>
+            <button class="member-tab"        data-filter="leader"   data-i18n="members.tab2">Lab Leaders</button>
+            <button class="member-tab"        data-filter="lecturer" data-i18n="members.tab3">Lecturers</button>
+            <button class="member-tab"        data-filter="student"  data-i18n="members.tab4">Students</button>
+            <button class="member-tab"        data-filter="alumni"   data-i18n="members.tab5">Alumni</button>
+        </div>
+
+                <div class="members-grid">
+                        <div class="member-card" data-role="leader" data-aos="fade-up" data-aos-delay="0">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260731-170651-Screenshot-2026-07-31-170640-fb4706dd.png" alt="Dr. Khoa Nguyen Dang" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Trưởng Lab</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Dr. Khoa Nguyen Dang</h3>
+                    <p class="member-title">Trưởng Lab</p>
+                    <p class="member-desc">Tiến sĩ Kỹ thuật Hàng không Vũ trụ từ Đại học Ulsan, Hàn Quốc (2018). Hướng nghiên cứu: hệ thống mô hình, hệ thống điều khiển, UAV, robot.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:khoand@vnuis.edu.vn" title="Email"><i class="fas fa-envelope"></i></a>                            <a href="https://scholar.google.com/citations?user=iV3j9P8AAAAJ" target="_blank" rel="noopener" title="Scholar"><i class="fas fa-graduation-cap"></i></a>                                                                                </div>
+                        <a class="member-view-link" href="/members/khoa-nguyen-dang">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="lecturer" data-aos="fade-up" data-aos-delay="60">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260730-162534-potrait-photo-6-Copy-271x382-1a51f18d.jpg" alt="Tung Bui Thanh" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Giảng viên chính</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Tung Bui Thanh</h3>
+                    <p class="member-title">Giảng viên chính</p>
+                    <p class="member-desc">Thạc sĩ Tự động hóa Công nghiệp từ ĐH Bách khoa Hà Nội (2008). Hơn 15 năm kinh nghiệm trong lĩnh vực tự động hóa và điều khiển.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:tungbt@vnuis.edu.vn" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/tung-bui-thanh">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="lecturer" data-aos="fade-up" data-aos-delay="120">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260730-162619-z4484390057528_8ef820cf40d70d70f5efd0a412090035-d7db6398.jpg" alt="Pham Hai Yen" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Giảng viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Pham Hai Yen</h3>
+                    <p class="member-title">Giảng viên</p>
+                    <p class="member-desc">Thạc sĩ Tự động hóa Công nghiệp từ ĐH Bách khoa Hà Nội (2008). Nghiên cứu IoT và hệ thống nhúng.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:yenph@vnuis.edu.vn" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/pham-hai-yen">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="180">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260813-185758-430c66d3-0d33-4cc9-b9d4-972ce7e53531-1---Copy-8333c9ba.png" alt="La Quang Hai" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">La Quang Hai</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">La Quang Hải là sinh viên chuyên ngành Kỹ thuật Điều khiển và Tự động hóa tại Đại học Bách khoa Hà Nội (HUST). Anh quan tâm đến các thuật toán điều khiển và việc tích hợp cảm biến trong các hệ thống robot thực tế. Mục tiêu của anh là góp phần thúc đẩy sự phát triển của các công nghệ tự hành thông minh.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:laquanghai2005@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/student">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="240">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260813-190410-bcbfcc50-22b7-43c3-93da-39a5580718c2-1---Copy-494cf6b6.png" alt="Pham Ngoc Tung" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Pham Ngoc Tung</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Phạm Ngọc Tùng là sinh viên năm thứ ba chuyên ngành Kỹ thuật Máy tính tại Trường Đại học Công nghệ (UET). Anh có niềm đam mê mãnh liệt với Internet vạn vật (IoT) và công nghệ bán dẫn. Tùng đặc biệt quan tâm đến việc xử lý dữ liệu từ cảm biến và đưa ra các quyết định thông minh dựa trên dữ liệu đó. Anh khao khát phát triển các mô hình IoT thực tế và hiệu quả, có thể mang lại những lợi ích thiết thực cho các hộ gia đình và đời sống hàng ngày.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:tungtp6205@gmail.cocom" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/student-2">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="300">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260814-012747-ChatGPT-Image-01_20_53-14-thg-8-2026-476a3c2c.png" alt="Nguyen Tuan Kiet" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Tuan Kiet</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Nguyễn Tuấn Kiệt là sinh viên chuyên ngành Kỹ thuật Phần mềm tại Đại học FPT Hà Nội. Anh có niềm đam mê với Trí tuệ Nhân tạo và tích cực quan tâm đến việc nghiên cứu, khám phá các mô hình AI khác nhau cũng như ứng dụng thực tế của chúng.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:nnnnguyrntuankiet@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/student-3">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="360">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260814-013042-ChatGPT-Image-01_29_41-14-thg-8-2026---Copy-b70b38b5.png" alt="Dao Hoang Trung" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Dao Hoang Trung</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Đào Hoàng Trung là sinh viên năm thứ ba chuyên ngành Kỹ thuật Điện tử - Viễn thông tại Trường Đại học Công nghệ (UET). Hướng nghiên cứu hiện tại của anh tập trung vào TinyML và Edge AI, đặc biệt là việc triển khai và tối ưu hóa các mô hình học máy cũng như các mô hình ngôn ngữ lớn (LLM) chạy cục bộ trên các hệ thống nhúng có tài nguyên hạn chế.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:daohoangtrung1349@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/student-4">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="420">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260731-225818-2ddf5de2-7f5b-4c67-a4e6-b9c011056cd4-1-85c4979f.jpg" alt="Do Thuy Trang" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Do Thuy Trang</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Đỗ Thùy Trang là sinh viên tại Trường Quốc tế. Cô theo học ngành Tự động hóa và Tin học. Trong suốt quá trình học tập, cô đã tích lũy được rất nhiều kinh nghiệm phong phú. Hơn thế nữa, cô còn cho thấy niềm đam mê to lớn đối với lĩnh vực tích hợp công nghệ và trí tuệ nhân tạo vào các ứng dụng y sinh, cũng như các hệ thống không người lái điều khiển từ xa.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:trangdt122410@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/do-thuy-trang">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="480">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260528-053626-KhanhLy-8de43dbf.jpg" alt="Nguyen Khanh Ly" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Khanh Ly</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Sinh viên AAI đam mê các ứng dụng AI và IoT.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                                                                                                                                        </div>
+                        <a class="member-view-link" href="/members/nguyen-khanh-ly">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="540">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260810-181501-Screenshot-2026-08-10-181437-bbfea2c8.png" alt="Nguyen Thi Anh Thu" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Thi Anh Thu</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Nguyễn Thị Anh Thư là sinh viên ngành Tự động hóa và Tin học tại Trường Quốc tế - Đại học Quốc gia Hà Nội. Cô có kinh nghiệm cơ bản về lập trình, thiết kế mạch và mô phỏng. Các lĩnh vực cô quan tâm bao gồm IoT, hệ thống nhúng và tự động hóa, và cô rất mong muốn được tham gia vào các dự án nghiên cứu để nâng cao kỹ năng của bản thân.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:ntathu233@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/nguyen-thi-anh-thu">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="600">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260803-173906-unnamed-0d158a27.jpg" alt="Kieu Ba Thinh" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Kieu Ba Thinh</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Kiều Bá Thịnh là sinh viên chuyên ngành Công nghệ Thông tinỨng dụng tại Trường Quốc tế, Đại học Quốc gia Hà Nội (VNU International School). Cậu ấy có niềm đam mê lớn đối với Trí tuệ Nhân tạo, với sự tập trung đặc biệt vào các tác nhân AI (AI agents) và Mô hình Ngôn ngữ Lớn (LLMs). Với tư duy chủ động trong việc khám phá các công nghệ mới nổi, Bá Thịnh đang từng bước xây dựng nền tảng vững chắc để theo đuổi các dự án có tầm ảnh hưởng nhằm phát triển các hệ thống AI thông minh và tự động.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:thinhkieu12092005@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/kieu-ba-thinh">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="660">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260803-173917-unnamed-1-8e4a5a91.jpg" alt="Nguyen Minh Thinh" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh Viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Minh Thinh</h3>
+                    <p class="member-title">Sinh Viên</p>
+                    <p class="member-desc">Nguyễn Minh Thịnh là sinh viên năm thứ ba tại Trường Đại học Công nghệ (UET), chuyên ngành Kỹ thuật Máy tính. Cậu có niềm yêu thích lớn đối với toán học và robot, đồng thời có đam mê khám phá sự giao thoa giữa các lĩnh vực này trong cả lý thuyết lẫn ứng dụng thực tế. Minh Thịnh thích tham gia vào các dự án liên quan đến hệ thống nhúng, thuật toán điều khiển và hệ thống robot thông minh. Cậu ấy cũng rất nhiệt huyết trong việc cập nhật các tiến bộ về trí tuệ nhân tạo và công nghệ tự động hóa.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:minhthinhn68@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/nguyen-minh-thinh">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="720">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260805-153048-Screenshot-2026-08-03-162223-020adeae.png" alt="Nguyen Duc Thinh" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh Viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Duc Thinh</h3>
+                    <p class="member-title">Sinh Viên</p>
+                    <p class="member-desc">Nguyễn Đức Thịnh là một sinh viên chuyên ngành Tự động hóa và Tin học tại Trường Quốc tế, Đại học Quốc gia Hà Nội (VNU International School). Cậu có kinh nghiệm cơ bản về lập trình, hệ thống nhúng, v.v. Cậu có sở thích học hỏi kiến thức mới và tiếp cận với các công nghệ khác nhau.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:nguyenducthinh221104@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/nguyen-duc-thinh">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="780">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260803-174018-anhme2-20eea9bf.jpg" alt="Nguyen Anh Vu" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh Viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Anh Vu</h3>
+                    <p class="member-title">Sinh Viên</p>
+                    <p class="member-desc">Nguyễn Anh Vũ là sinh viên ngành Tin học và Tự động hóa tại Trường Quốc tế - Đại học Quốc gia Hà Nội . Có kinh nghiệm về lập trình website, hệ thống nhúng và IoT... Có niềm đam mê với kĩ thuật, thích học hỏi những kiến thức mới. Bên cạnh đó còn tích lũy được nền tảng vững chắc trong việc thiết kế hệ thống điều khiển, sử dụng các phần mềm mô ỏng chuyên dụng.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:vunguyen1552005@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/nguyen-anh-vu">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="840">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260805-152441-z8112404908855_8dae422d5a9a736417f416dd7ea48a92-6c3ff41f.jpg" alt="Le Quang Huy" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh Viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Le Quang Huy</h3>
+                    <p class="member-title">Sinh Viên</p>
+                    <p class="member-desc">Lê Quang Huy là sinh viên ngành Tin học và Tự động hóa tại Trường Quốc tế - Đại học Quốc gia Hà Nội. Cậu ấy có kinh nghiệm thực tế về lập trình, hệ thống nhúng, robot, ROS, PX4 và mô phỏng Gazebo. Cậu ấy đam mê khám phá các công nghệ mới, không ngừng nâng cao kỹ năng chuyên môn và ứng dụng kiến thức của mình vào các dự án kỹ thuật trong thực tế</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:lequanghuy16122004@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/le-quang-huy">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="900">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260805-153056-Screenshot-2026-08-03-190743-3b0bc2cc.png" alt="Do Trinh Thuan Minh" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh Viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Do Trinh Thuan Minh</h3>
+                    <p class="member-title">Sinh Viên</p>
+                    <p class="member-desc">Thuận Minh là sinh viên ngành Trí tuệ Nhân tạo tại Đại học Công nghệ Swinburne. Cậu ấy có niềm đam mê với trí tuệ nhân tạo, học máy và phát triển phần mềm, cùng với sự quan tâm đặc biệt đến việc xây dựng các hệ thống thông minh có khả năng giải quyết các vấn đề thực tiễn. Cậu ấy thích khám phá các công nghệ AI mới nổi, không ngừng nâng cao kỹ năng lập trình và ứng dụng các phương pháp tiếp cận dựa trên dữ liệu vào các ứng dụng thực tế. Trong tương lai, cậu ấy hướng tới mục tiêu đóng góp vào việc phát triển các giải pháp AI mang tính đổi mới, tạo ra những giá trị ý nghĩa cho xã hội</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:thuanminhaa1@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/do-trinh-thuan-minh">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="960">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260810-182022-z8112474049778_6446f84b8ef65c722207db4e0e3aa84a-b268db96.jpg" alt="Nguyen Thanh Tung" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Nguyen Thanh Tung</h3>
+                    <p class="member-title">Sinh viên</p>
+                    <p class="member-desc">Nguyễn Thanh Tùng — một sinh viên công nghệ thông tin tại Đại học Quốc gia Hà Nội, có niềm đam mê sâu sắc với Hệ thống Nhúng và Trí tuệ Nhân tạo (AI). Thích biến các ý tưởng thành sản phẩm thực tế bằng cách sử dụng vi điều khiển, IoT và các công cụ AI như mô hình ngôn ngữ lớn (LLMs), Thị giác Máy tính và Xử lý Ngôn ngữ Tự nhiên (NLP). Giấc mơ lớn của tôi? Kết hợp AI với công nghệ nhúng để xây dựng những sản phẩm thông minh và tuyệt vời! Khi không dán mắt vào máy tính xách tay, bạn sẽ thấy tôi đang đập cầu trên sân cầu lông, cày cuốc trong các trò chơi điện tử, hoặc đơn giản là đi chơi và trò chuyện với bạn bè.</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:tung085863133@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/nguyen-thanh-tung">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                        <div class="member-card" data-role="student" data-aos="fade-up" data-aos-delay="1020">
+                <div class="member-image">
+                    <img src="/uploads/members/members-20260803-193527-ChatGPT-Image-19_34_57-3-thg-8-2026-59d911f5.png" alt="Phan Duc Hieu" onerror="this.src='https://i.pravatar.cc/400'">
+                    <span class="member-role">Sinh Viên</span>
+                </div>
+                <div class="member-info">
+                    <h3 class="member-name">Phan Duc Hieu</h3>
+                    <p class="member-title">Sinh Viên</p>
+                    <p class="member-desc">Phan Đức Hiếu là sinh viên năm hai ngành Công nghệ Thông tin tại Trường Đại học Công nghệ (UET). Cậu ấy có sự quan tâm đến trí tuệ nhân tạo và MLOps, đồng thời rất mong muốn được học hỏi cách xây dựng và triển khai các hệ thống AI trong thực tế</p>
+                    <div class="member-card-footer">
+                        <div class="member-social">
+                            <a href="mailto:phanduchieu1905@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>                                                                                                            </div>
+                        <a class="member-view-link" href="/members/phan-duc-hieu">
+                            Xem <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                    </div>
+            </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-main">ISI</span>
+                            <span class="logo-sub">LAB</span>
+                        </div>
+                    </div>
+                    <p data-i18n="footer.about">Intelligent System and IoT Laboratory - Pioneering research in AI, IoT, Robotics and UAV systems.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.links">Quick Links</h4>
+                    <ul>
+                        <li><a href="/"        data-i18n="nav.home">Home</a></li>
+                        <li><a href="/research" data-i18n="nav.research">Research</a></li>
+                        <li><a href="/members" data-i18n="nav.members">Members</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.explore">Explore</h4>
+                    <ul>
+                        <li><a href="/projects"     data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="/publications" data-i18n="nav.publications">Publications</a></li>
+                        <li><a href="/news"         data-i18n="nav.news">News</a></li>
+                        <li><a href="/gallery"      data-i18n="nav.gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contact">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Khoa Quốc tế - ĐHQGHN, 1 Phan Tây Nhạc, Xuân Phương, Hà Nội</span></li>
+                        <li><i class="fas fa-envelope"></i> <span></span></li>
+                        <li><i class="fas fa-phone"></i> <span></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ISI Lab. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p><a href="/admin/login" class="admin-link"><i class="fas fa-lock"></i> <span data-i18n="footer.admin">Admin</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" alt="">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        window.SITE_URL = "";
+        window.ISILAB_LANG = "vi";
+    </script>
+    <script src="/public/js/i18n.js?v=1785535130"></script>
+    <script src="/public/js/particles.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+Subject: [{{ lab_name }}] Báo cáo tuần {{ week_label }}
+1. LỊCH TRỰC TUẦN TỚI ({{ next_week_label }}): {{ duty_link or "chưa có tab lịch trực" }}
+{% if not duty_tab_exists %}
+   Chưa tạo tab lịch trực tuần tới.
+{% else %}
+{% if assignment %}
+   Giao trực tự động: {{ assignment.assigned|length }} buổi T mới. Danh sách dưới đây: "(T)" = trực chính thức, tên không kèm (T) = đăng ký V.
+{% if assignment.loads %}
+   Số buổi T / đăng ký: {% for x in assignment.loads %}{{ x.name }} {{ x.t }}/{{ x.registered }}{% if not loop.last %}; {% endif %}{% endfor %}
+
+{% endif %}
+{% if assignment.uncovered %}
+   CẦN XỬ LÝ — buổi không ai đăng ký nên chưa có người trực T: {{ assignment.uncovered|join("; ") }}
+{% endif %}
+{% if assignment.no_slot %}
+   CẦN XỬ LÝ — chưa giao được T vì chưa đăng ký buổi nào: {{ assignment.no_slot|join(", ") }}
+{% endif %}
+{% endif %}
+{% for d in roster %}
+   - {{ d.label }}: {% for sl in d.slots %}{{ sl.label }}: {{ sl.people|join(", ") if sl.people else "(trống)" }}{% if not loop.last %} | {% endif %}{% endfor %}
+
+{% endfor %}
+   Buổi chưa có ai trực: {{ empty_slots|length }}/{{ total_slots }}
+
+   Chưa đủ {{ min_sessions }} buổi ({{ under_min|length }} người):
+{% for p in under_min %}
+   - {{ p.name }} — {{ p.count }}/{{ min_sessions }}
+{% else %}
+   Không có
+{% endfor %}
+{% if missing_rows %}
+   Thành viên chưa có dòng trong lịch trực ({{ missing_rows|length }}): {{ missing_rows|join(", ") }}
+{% endif %}
+{% endif %}
+
+2. THIẾT BỊ ĐANG ĐƯỢC MƯỢN ({{ active_count }} lượt, {{ holders|length }} người)
+{% for h in holders %}
+   - {{ h.ho_ten }}:
+{% for b in h["items"] %}
+       + {{ b.ten_tb }} ({{ b.ma_tb or "?" }}) ×{{ b.so_luong }} — mượn {{ b.ngay_muon }} — hạn {{ b.han_tra }}{% if b.days_late %} — QUÁ HẠN {{ b.days_late }} ngày{% endif %}
+
+{% endfor %}
+{% else %}
+   Không có
+{% endfor %}
+
+3. ĐẾN HẠN TRẢ TỪ {{ today_label }} ĐẾN {{ due_until }} ({{ due_soon|length }})
+{% for b in due_soon %}
+   - {{ b.han_tra }} — {{ b.ho_ten }} — {{ b.ten_tb }} ({{ b.ma_tb or "?" }}) ×{{ b.so_luong }}{% if b.days_left == 0 %} — hôm nay{% endif %}
+
+{% else %}
+   Không có
+{% endfor %}
+
+4. THIẾT BỊ QUÁ HẠN TRẢ ({{ overdue|length }})
+{% for b in overdue %}
+   - {{ b.ho_ten }} — {{ b.ten_tb }} ({{ b.ma_tb or "?" }}) ×{{ b.so_luong }} — hạn {{ b.han_tra }} — trễ {{ b.days_late }} ngày
+{% else %}
+   Không có
+{% endfor %}
+
+5. MƯỢN / TRẢ TRONG TUẦN
+   - Mượn mới: {{ borrowed_count }} lượt | Đã trả: {{ returned_count }} lượt | Gia hạn: {{ extended_count }} lượt
+{% for d in damaged %}
+   - Trả kèm hư hỏng: {{ d.ten_tb }} ({{ d.ma_tb or "?" }}) — {{ d.ho_ten }} — "{{ d.tinh_trang }}"
+{% else %}
+   - Trả kèm hư hỏng: Không có
+{% endfor %}
+
+6. ĐƠN GIA NHẬP MỚI ({{ applications|length }})
+{% for a in applications %}
+   - {{ a.ho_ten }} — {{ a.sdt }} — {{ a.email }} — {{ a.link or "" }}
+{% else %}
+   Không có
+{% endfor %}
+
+7. ĐƠN KHÁC TRONG TUẦN
+{% for f in other_forms %}
+   - {{ f.form_id }}: {{ f.count }}{% if f.link %} — {{ f.link }}{% endif %}
+
+{% else %}
+   Không có
+{% endfor %}
+
+8. DỮ LIỆU CẦN SỬA
+{% for line in data_issues %}
+   - {{ line }}
+{% else %}
+   Không có
+{% endfor %}
+
+Mail tự động từ hệ thống Lab Agent.

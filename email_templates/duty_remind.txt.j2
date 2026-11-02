@@ -1,0 +1,16 @@
+Subject: [{{ lab_name }}] Nhắc đăng ký lịch trực tuần {{ week_label }}
+Chào {{ name }},
+
+{% if missing_row %}
+Tên bạn chưa có trong tab lịch trực tuần {{ week_label }}. Bạn vui lòng báo leader thêm tên vào rồi đánh "V" tối thiểu {{ min_sessions }} buổi có thể trực.
+{% else %}
+Lịch trực lab tuần {{ week_label }} của bạn hiện có {{ count }}/{{ min_sessions }} buổi{% if slots %}: {{ slots|join(", ") }}{% endif %}.
+
+Bạn vui lòng đăng ký thêm {{ min_sessions - count }} buổi cho đủ tối thiểu {{ min_sessions }} buổi.
+{% endif %}
+Link lịch trực: {{ link }}
+Hạn đăng ký: {{ deadline }}.
+
+Đánh "V" vào các buổi bạn có thể lên trực; hệ thống sẽ tự giao buổi trực chính thức ("T") sau hạn đăng ký.
+
+Mail tự động từ hệ thống Lab Agent.

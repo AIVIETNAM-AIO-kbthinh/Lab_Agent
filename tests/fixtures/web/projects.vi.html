@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | ISI Lab</title>
+    <meta name="description" content="ISI Lab - Intelligent System and IoT Laboratory at VNU International School. Research in AI, IoT, Robotics, UAV, and Automation.">
+    <link rel="icon" type="image/png" href="/public/assets/logo-light.png">
+    <link rel="shortcut icon" href="/public/assets/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/site.css">
+
+    <meta name="csrf-token" content="82509d8e328eb8d47ff0ba239bec8532ca75570a220a556c21300a57fe9b43e0">
+</head>
+<body class="page-projects">
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="ISI Lab Home">
+                <img src="/public/assets/logo-light.png" alt="ISI Lab" class="header-logo-img logo-light">
+                <img src="/public/assets/logo-dark.png" alt="ISI Lab" class="header-logo-img logo-dark">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/"             class="nav-link "         data-i18n="nav.home">Home</a></li>
+                <li><a href="/research"     class="nav-link "     data-i18n="nav.research">Research</a></li>
+                <li><a href="/members"      class="nav-link "      data-i18n="nav.members">Members</a></li>
+                <li><a href="/projects"     class="nav-link active"     data-i18n="nav.projects">Projects</a></li>
+                <li><a href="/publications" class="nav-link " data-i18n="nav.publications">Publications</a></li>
+                <li><a href="/news"         class="nav-link "         data-i18n="nav.news">News</a></li>
+                <li><a href="/gallery"      class="nav-link "      data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="/contact"      class="nav-link "      data-i18n="nav.contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="lang-toggle" id="langSwitch" href="/projects?lang=en" title="Switch to English" aria-label="Switch to English">
+                    <span class="lang-current">VI</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-hero">
+    <div class="container">
+        <div class="crumbs">Home / Projects</div>
+        <h1 data-i18n="projects.title">Featured Projects</h1>
+        <p class="subtitle" data-i18n="projects.subtitle">Innovation in action</p>
+    </div>
+</section>
+
+<section class="section section-projects" style="padding-top:50px">
+    <div class="container">
+        <form class="filter-bar" method="get" data-aos="fade-up">
+            <select name="tag" onchange="this.form.submit()">
+                <option value="">Tất cả lĩnh vực</option>
+                                    <option value="AI" >AI</option>
+                                    <option value="AI, UAV" >AI, UAV</option>
+                                    <option value="Energy" >Energy</option>
+                                    <option value="UAV" >UAV</option>
+                            </select>
+            <select name="year" onchange="this.form.submit()">
+                <option value="">Tất cả năm</option>
+                                    <option value="2026" >2026</option>
+                                    <option value="2023" >2023</option>
+                                    <option value="2022" >2022</option>
+                                    <option value="2021" >2021</option>
+                            </select>
+                    </form>
+
+                <div class="projects-grid">
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/800x600/00bcd4/ffffff?text=Project" alt="Hệ thống giám sát, định vị trong nhà linh hoạt cho các công trình thông minh khu vực ASEAN">
+                    <span class="project-tag">Project</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Hệ thống giám sát, định vị trong nhà linh hoạt cho các công trình thông minh khu vực ASEAN</h3>
+                    <p class="project-desc">Dự án Customizable Indoor Tracking System (ITS) for ASEAN Smart Facilities là dự án IVO, với sự hỗ trợ về mặt nghiên cứu cũng như tài chính của Viện Công nghệ Thông tin và Truyền thông Quốc gia Nhật Bản — National Institute of Information and Communications Technology (NICT), triển khai với sự hợp tác giữa ISILab và MIMOS (Malaysia). Dự án hướng tới xây dựng một nền tảng định vị và theo dõi trong nhà có khả năng tùy biến cho các mô hình cơ sở thông minh. Hệ thống sử dụng các điểm mốc tham chiếu được bố trí phù hợp trong không gian, kết hợp với các thẻ theo dõi để xác định và hiển thị vị trí theo thời gian thực của con người hoặc tài sản trên bản đồ số được xây dựng từ dữ liệu khảo sát. Dự án bao gồm toàn bộ quá trình từ khảo sát hiện trường, xây dựng và chuẩn hóa bản đồ, thiết kế phương án triển khai, cấu hình thiết bị, tích hợp hệ thống, thiết lập khu vực theo dõi đến trực quan hóa dữ liệu vị trí. Không chỉ dừng ở việc xác định vị trí, nền tảng còn tạo cơ sở cho các ứng dụng như giám sát con người và tài sản, quản lý theo khu vực, theo dõi lịch sử di chuyển, hỗ trợ quan sát hoạt động, lập báo cáo và cảnh báo theo sự kiện. Với khả năng tùy chỉnh và mở rộng theo từng không gian triển khai, dự án có tiềm năng ứng dụng trong tòa nhà thông minh, phòng thí nghiệm, nhà máy, kho vận, cơ sở y tế và nhiều môi trường trong nhà khác tại Việt Nam cũng như khu vực ASEAN.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2026 • In Progress</span>
+                        <a href="/projects/customizable-indoor-tracking-system-its-for-asean-smart-facilities">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="60">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-211506-Screenshot-2026-09-08-211426-893cb334.png" alt="Nghiên cứu và phát triển kỹ thuật học máy siêu nhẹ cho ứng dụng trên thiết bị bay không người lái tích hợp xử lý thông minh tại biên và đa cảm biến">
+                    <span class="project-tag">AI, UAV</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu và phát triển kỹ thuật học máy siêu nhẹ cho ứng dụng trên thiết bị bay không người lái tích hợp xử lý thông minh tại biên và đa cảm biến</h3>
+                    <p class="project-desc">Dự án tập trung triển khai các mô hình TinyML xử lý trực tiếp tại biên (Edge AI) trên các nền tảng phần cứng UAV có tài nguyên hạn chế, kết hợp với hợp nhất dữ liệu từ nhiều cảm biến (Multi-Sensor Fusion). Hướng nghiên cứu nhằm giúp UAV có khả năng xử lý và phân tích dữ liệu ngay trên thiết bị, giảm phụ thuộc vào hệ thống tính toán bên ngoài, đồng thời hỗ trợ các bài toán như nhận dạng trạng thái bay, nhận dạng hình ảnh và ra quyết định theo thời gian thực. Qua đó, dự án hướng tới phát triển các hệ thống UAV thông minh, nhỏ gọn, tiết kiệm năng lượng và phù hợp với các ứng dụng thực tế.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2026 • Đang thực hiện</span>
+                        <a href="/projects/research-and-development-of-tinyml-techniques-for-uav-applications-with-intelligent-edge-processing-and-multi-sensor-fusion">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="120">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-195321-9555f86e-4457-4925-9314-1231224c3207---Copy-a3acc04f.png" alt="Nghiên cứu về tạo ảnh độ đàn hồi và độ nhớt của mô mềm">
+                    <span class="project-tag">AI</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu về tạo ảnh độ đàn hồi và độ nhớt của mô mềm</h3>
+                    <p class="project-desc">Dự án “Research on Viscoelastic Imaging of Soft Tissues” tập trung nghiên cứu các phương pháp tạo ảnh nhằm đánh giá đặc tính cơ học của mô mềm, đặc biệt là tính đàn hồi và tính nhớt của mô sinh học. Thông qua việc phân tích phản ứng của mô trước các biến dạng cơ học, nghiên cứu hướng tới cung cấp thêm thông tin định lượng bên cạnh hình ảnh cấu trúc thông thường, từ đó hỗ trợ việc đặc trưng và đánh giá tình trạng mô. Dự án góp phần phát triển các phương pháp tạo ảnh không xâm lấn, có tiềm năng ứng dụng trong nghiên cứu y sinh, phân tích đặc tính mô và hỗ trợ chẩn đoán trong tương lai.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2023 • </span>
+                        <a href="/projects/research-on-viscoelastic-imaging-of-soft-tissues">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="180">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-193617-venergy_dien-mat-troi-nong-nghiep-co-duoc-tinh-la-dien-mat-troi-mai-nha-khong-cfbb45c6.jpeg" alt="Nghiên cứu, thiết kế, chế tạo hệ thống Quang điện-nông nghiệp thân thiện môi trường dựa trên công nghệ hội tụ năng lượng mặt trời">
+                    <span class="project-tag">Energy</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu, thiết kế, chế tạo hệ thống Quang điện-nông nghiệp thân thiện môi trường dựa trên công nghệ hội tụ năng lượng mặt trời</h3>
+                    <p class="project-desc">Dự án “Research, Design and Manufacture Environmentally Friendly Agricultural-Photovoltaic Systems Based on Solar Energy Convergence Technology” tập trung nghiên cứu, thiết kế và chế tạo hệ thống nông nghiệp kết hợp điện mặt trời, cho phép đồng thời khai thác năng lượng sạch và phục vụ sản xuất nông nghiệp. Dự án hướng tới tối ưu hiệu quả sử dụng đất, phát triển mô hình vận hành bền vững và giảm tác động đến môi trường. Đây là nền tảng tiềm năng cho các mô hình nông nghiệp hiện đại gắn với năng lượng tái tạo.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2023 • </span>
+                        <a href="/projects/research-design-and-manufacture-environmentally-friendly-agricultural-photovoltaic-systems-based-on-solar-energy-convergence-technology">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="240">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-194605-Screenshot-2026-09-08-194516-19682a7e.png" alt="Nghiên cứu phát triển mũi điện tử dựa trên hệ đa cảm biến khí oxit kim loại bán dẫn (MOS) và trí tuệ nhân tạo (AI)">
+                    <span class="project-tag">AI</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu phát triển mũi điện tử dựa trên hệ đa cảm biến khí oxit kim loại bán dẫn (MOS) và trí tuệ nhân tạo (AI)</h3>
+                    <p class="project-desc">Dự án “A Study on Development of Electronic Noses Based on Metal Oxide Semiconductor (MOS) Sensor Array and Artificial Intelligence (AI)” tập trung phát triển hệ thống mũi điện tử thông minh có khả năng nhận biết và phân biệt các loại mùi hoặc khí khác nhau. Hệ thống kết hợp mảng cảm biến MOS với trí tuệ nhân tạo để phân tích đặc trưng tín hiệu và hỗ trợ phân loại tự động. Dự án bao gồm thu thập dữ liệu cảm biến, xử lý tín hiệu, nhận dạng bằng AI và đánh giá hệ thống. Hướng nghiên cứu này có tiềm năng ứng dụng trong giám sát môi trường, đánh giá chất lượng thực phẩm, giám sát công nghiệp và các hệ thống cảm biến thông minh.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2022 • </span>
+                        <a href="/projects/a-study-on-development-of-electronic-noses-based-on-metal-oxide-semiconductor-mos-sensor-array-and-artificial-intelligence-ai">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-233223-Screenshot-2026-09-08-232910-adf8a9d5.png" alt="Nghiên cứu công nghệ, thiết bị kiểm soát chất lượng nguồn cấp nước mặt">
+                    <span class="project-tag">UAV</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu công nghệ, thiết bị kiểm soát chất lượng nguồn cấp nước mặt</h3>
+                    <p class="project-desc">Bằng cách trang bị cho drone các cảm biến chuyên dụng, camera hiện đại kết hợp với hệ thống phần mềm quản lý trên mặt đất, chúng ta có thể quét nhanh các khu vực mặt nước rộng lớn. Hệ thống này được thiết kế để phát hiện sớm các dấu hiệu ô nhiễm, đo lường sức khỏe nguồn nước và gửi cảnh báo theo thời gian thực về trung tâm điều hành.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2021 • </span>
+                        <a href="/projects/research-techniques-and-management-devices-for-monitoring-the-water-quality-of-the-lake-using-uav">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="360">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-194950-e16de916-2206-40e8-9e11-eaf1bb2a248c-3ea4a6c2.png" alt="Nghiên cứu và phát triển thuật toán phát hiện nhịp tim từ xa sử dụng Radar băng thông siêu rộng">
+                    <span class="project-tag">AI</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu và phát triển thuật toán phát hiện nhịp tim từ xa sử dụng Radar băng thông siêu rộng</h3>
+                    <p class="project-desc">Dự án “Research and Develop the Remote Heart Rate Measurement Algorithm Using Ultra-Wideband Radar” nghiên cứu phương pháp đo nhịp tim từ xa, không tiếp xúc, sử dụng radar băng siêu rộng (Ultra-Wideband Radar). Nghiên cứu tập trung khai thác và xử lý tín hiệu radar phản xạ từ cơ thể người nhằm nhận biết những biến đổi sinh lý nhỏ liên quan đến hoạt động của tim, từ đó ước lượng nhịp tim mà không cần gắn trực tiếp cảm biến hoặc thiết bị đo lên cơ thể. Quá trình nghiên cứu bao gồm thu nhận tín hiệu, xử lý dữ liệu, ước lượng nhịp tim và đánh giá khả năng hoạt động trong các điều kiện đo khác nhau. Với ưu điểm theo dõi không tiếp xúc và hạn chế ảnh hưởng đến người sử dụng, hướng nghiên cứu này mở ra tiềm năng ứng dụng trong các hệ thống chăm sóc sức khỏe thông minh và giám sát môi trường sống. Dự án đồng thời tạo nền tảng cho các nghiên cứu tiếp theo về theo dõi dấu hiệu sinh tồn từ xa và phát triển các giải pháp cảm biến thông minh phục vụ y tế, hỗ trợ chăm sóc và các môi trường lấy con người làm trung tâm.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2021 • </span>
+                        <a href="/projects/research-and-develop-the-remote-heart-rate-measurement-algorithm-using-ultra-wideband-radar">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="420">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-193026-tri-tue-nhan-dao-bb658094.jpg" alt="Phương pháp kiểm tra không phá hủy khuyết tật trong kết cấu nhiều lớp dựa trên trí tuệ nhân tạo">
+                    <span class="project-tag">AI</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Phương pháp kiểm tra không phá hủy khuyết tật trong kết cấu nhiều lớp dựa trên trí tuệ nhân tạo</h3>
+                    <p class="project-desc">Dự án “Nondestructive Evaluation of Damage in a Multilayer Structure Based on Artificial Intelligence” nghiên cứu phương pháp ứng dụng trí tuệ nhân tạo để phát hiện và đánh giá hư hỏng trong các kết cấu nhiều lớp mà không làm ảnh hưởng đến cấu trúc vật lý. Nghiên cứu tập trung phân tích dữ liệu kiểm tra nhằm nhận biết các dấu hiệu bất thường và hỗ trợ đánh giá hư hỏng tự động. Việc kết hợp kiểm tra không phá hủy với AI giúp nâng cao hiệu quả, tính nhất quán và độ tin cậy trong quá trình giám sát, với tiềm năng ứng dụng trong bảo trì kỹ thuật, sản xuất và theo dõi tình trạng kết cấu.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i>  • </span>
+                        <a href="/projects/nondestructive-evaluation-of-damage-in-a-multilayer-structure-based-on-artificial-intelligence">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="480">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-212400-Screenshot-2026-09-08-212347-5f4f1e6d.png" alt="Nghiên cứu cảm biến ảo sử dụng trong máy bay không người lái Quadrotor">
+                    <span class="project-tag">UAV</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Nghiên cứu cảm biến ảo sử dụng trong máy bay không người lái Quadrotor</h3>
+                    <p class="project-desc">Dự án “Studying the Virtual Sensor for the Unmanned Aerial Vehicles Quadrotor” nghiên cứu phương pháp cảm biến ảo nhằm nâng cao khả năng nhận biết trạng thái của thiết bị bay không người lái dạng quadrotor (UAV). Dự án tập trung khai thác dữ liệu bay sẵn có kết hợp với các mô hình tính toán để ước lượng những trạng thái quan trọng của UAV, qua đó bổ sung thông tin cho hệ thống mà không hoàn toàn phụ thuộc vào các phép đo trực tiếp từ cảm biến vật lý. Quá trình nghiên cứu bao gồm phân tích dữ liệu bay, xây dựng mô hình, mô phỏng và đối chiếu giữa trạng thái ước lượng với dữ liệu thực tế để đánh giá khả năng hoạt động của cảm biến ảo. Kế thừa thế mạnh của ISI Lab về hệ thống nhúng, tự động hóa và tích hợp AI trên phần cứng, dự án đồng thời hướng tới khả năng triển khai các mô hình ước lượng trực tiếp trên nền tảng UAV để hỗ trợ xử lý nhanh và chủ động hơn trong quá trình vận hành. Nghiên cứu tạo nền tảng cho việc phát triển các hệ thống UAV thông minh, linh hoạt và có khả năng hoạt động tốt hơn trong các môi trường phức tạp.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i>  • </span>
+                        <a href="/projects/studying-the-virtual-sensor-for-the-unmanned-aerial-vehicles-quadrotor">Xem <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                    </div>
+            </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-main">ISI</span>
+                            <span class="logo-sub">LAB</span>
+                        </div>
+                    </div>
+                    <p data-i18n="footer.about">Intelligent System and IoT Laboratory - Pioneering research in AI, IoT, Robotics and UAV systems.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.links">Quick Links</h4>
+                    <ul>
+                        <li><a href="/"        data-i18n="nav.home">Home</a></li>
+                        <li><a href="/research" data-i18n="nav.research">Research</a></li>
+                        <li><a href="/members" data-i18n="nav.members">Members</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.explore">Explore</h4>
+                    <ul>
+                        <li><a href="/projects"     data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="/publications" data-i18n="nav.publications">Publications</a></li>
+                        <li><a href="/news"         data-i18n="nav.news">News</a></li>
+                        <li><a href="/gallery"      data-i18n="nav.gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contact">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Khoa Quốc tế - ĐHQGHN, 1 Phan Tây Nhạc, Xuân Phương, Hà Nội</span></li>
+                        <li><i class="fas fa-envelope"></i> <span></span></li>
+                        <li><i class="fas fa-phone"></i> <span></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ISI Lab. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p><a href="/admin/login" class="admin-link"><i class="fas fa-lock"></i> <span data-i18n="footer.admin">Admin</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" alt="">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        window.SITE_URL = "";
+        window.ISILAB_LANG = "vi";
+    </script>
+    <script src="/public/js/i18n.js?v=1785535130"></script>
+    <script src="/public/js/particles.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>

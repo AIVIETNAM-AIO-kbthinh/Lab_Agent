@@ -1,0 +1,18 @@
+Subject: [{{ lab_name }}] Thành viên mới: {{ ho_ten }}
+Chào thầy/cô,
+
+{{ approver }} vừa duyệt đơn gia nhập của {{ ho_ten }} và đã thêm vào danh sách thành viên (Members).
+{% if account_mailed -%}
+Hệ thống đã tự tạo tài khoản Lab Agent cho {{ email }} và gửi mật khẩu tạm qua mail.
+{%- elif account_existed -%}
+Email {{ email }} đã có tài khoản Lab Agent từ trước, không tạo mới.
+{%- else -%}
+Hệ thống CHƯA gửi được mật khẩu tạm tới {{ email or "(không email)" }}. Vui lòng vào trang Quản trị → Tài khoản
+để tạo hoặc đặt lại mật khẩu.
+{%- endif %}
+
+
+Thông tin: MSSV {{ mssv or "—" }} · {{ truong or "—" }} · SĐT {{ sdt or "—" }}
+Mã đơn: {{ submission_id }}
+
+Mail tự động từ hệ thống Lab Agent.

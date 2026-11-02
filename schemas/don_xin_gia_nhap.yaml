@@ -1,0 +1,57 @@
+# Đơn xin gia nhập phòng thí nghiệm — viết tay theo mẫu templates/DonXinGiaNhap (TK §7.1, §8.1).
+# `anchor` phải khớp NGUYÊN VĂN đoạn chữ trong mẫu đơn (sau khi gộp các run); đổi mẫu thì sửa anchor tương ứng.
+form_id: don_xin_gia_nhap
+version: "2026-10-19"
+title: Đơn xin gia nhập phòng thí nghiệm
+description: Dành cho sinh viên muốn tham gia lab. Điền thông tin cá nhân, hướng nghiên cứu quan tâm và gửi kèm CV.
+roles: [guest]
+hook: application
+template:
+  drive_path: templates/DonXinGiaNhap
+intro: Bạn có thể tải mẫu đơn này về, điền rồi gửi lại cho mình.
+
+fields:
+  - key: ngay_lap
+    label: Ngày làm đơn
+    type: date
+    filled_by: system          # = ngày nộp
+    default: today
+    anchor: "Hà Nội, ngày … tháng … năm …"
+    blank: date_parts
+
+  - {key: ho_ten, label: Họ và tên, type: text, anchor: "Em tên là:", max_length: 100}
+  - {key: ngay_sinh, label: Ngày sinh, type: date, required: false, anchor: "Ngày sinh:", not_after: today}
+  - {key: mssv, label: Mã số sinh viên, type: text, anchor: "Mã số sinh viên:", max_length: 40,
+     hint: "Không ép định dạng, sinh viên đến từ nhiều trường."}
+  - {key: lop_khoa, label: Lớp / Khóa, type: text, required: false, anchor: "Lớp / Khóa:"}
+  - {key: nganh_hoc, label: Ngành học, type: text, required: false, anchor: "Ngành học:"}
+  - {key: khoa_truong, label: Khoa / Trường, type: text, anchor: "Khoa / Trường:",
+     hint: "Ghi đúng như người dùng nói, không tự viết đầy đủ tên viết tắt."}
+  - {key: sdt, label: Số điện thoại, type: phone, anchor: "Điện thoại:"}
+  - {key: email, label: Email, type: email, anchor: "Email:"}
+  - {key: huong_nghien_cuu, label: Hướng nghiên cứu quan tâm, type: longtext,
+     anchor: "1. Hướng nghiên cứu quan tâm", blank: next_line}
+  - {key: ky_nang, label: "Kiến thức, kỹ năng và kinh nghiệm liên quan", type: longtext, required: false,
+     anchor: "2. Kiến thức, kỹ năng và kinh nghiệm liên quan", blank: next_line}
+  - {key: muc_tieu, label: Mục tiêu khi tham gia lab, type: longtext, required: false,
+     anchor: "3. Mục tiêu khi tham gia phòng thí nghiệm", blank: next_line}
+  - {key: thoi_gian_tham_gia, label: Thời gian có thể tham gia, type: longtext,
+     anchor: "4. Thời gian có thể tham gia", blank: next_line}
+
+  - {key: cv, label: CV (PDF hoặc DOCX), type: attachment, accept: [pdf, docx],
+     anchor: "- Sơ yếu lý lịch khoa học / CV:", blank: after_anchor}
+
+  - {key: y_kien_truong_lab, label: Ý kiến của trưởng phòng thí nghiệm, type: longtext, required: false,
+     filled_by: lab}
+
+signatures:
+  - {label: "NGƯỜI LÀM ĐƠN", field: ho_ten}
+  - {label: "Ý KIẾN CỦA TRƯỞNG PHÒNG THÍ NGHIỆM"}
+
+output:
+  format: pdf
+  folder: "submissions/applications/{folder_name}"     # <HoTen>_<SDT>; cùng SĐT nộp lại → cùng folder
+  filename: "{today:%Y-%m-%d}_DonXinGiaNhap"
+  attachment_names:
+    cv: "{today:%Y-%m-%d}_CV"
+  versioning: true

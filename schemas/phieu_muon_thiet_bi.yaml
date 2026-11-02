@@ -1,0 +1,62 @@
+# Phiếu mượn thiết bị — viết tay theo mẫu templates/PhieuMuonThietBi.docx (TK §7.1, §8.2).
+# Mục I lấy từ dòng Members của người đăng nhập (locked), không lấy từ nội dung phiếu.
+form_id: phieu_muon_thiet_bi
+version: "2026-10-19"
+title: Phiếu mượn thiết bị
+description: Mượn một hoặc nhiều thiết bị của lab (đã được leader đồng ý trước). Hệ thống ghi sổ mượn và trả mã phiếu.
+roles: [member, thu_ki, leader, admin]
+hook: equipment_borrow
+template:
+  drive_path: templates/PhieuMuonThietBi.docx
+
+fields:
+  - {key: ngay_lap, label: Ngày lập phiếu, type: date, filled_by: system, default: today,
+     anchor: "Hà Nội, ngày … tháng … năm …", blank: date_parts}
+
+  # I. THÔNG TIN NGƯỜI MƯỢN
+  - {key: ho_ten, label: Họ và tên, type: text, source: account.ho_ten, locked: true, anchor: "Họ và tên:"}
+  - {key: vai_tro, label: Vai trò trong lab, type: text, source: account.role_label, locked: true,
+     anchor: "Vai trò trong phòng thí nghiệm:"}
+  - {key: mssv, label: Mã số sinh viên / cán bộ, type: text, source: account.mssv, locked: true, required: false,
+     anchor: "Mã số sinh viên / cán bộ:"}
+  - {key: sdt, label: Điện thoại, type: text, source: account.sdt, locked: true, required: false,
+     anchor: "Điện thoại:"}
+  - {key: email, label: Email, type: text, source: account.email, locked: true, required: false, anchor: "Email:"}
+
+  # II. THÔNG TIN MƯỢN
+  - {key: muc_dich, label: Mục đích sử dụng, type: text, anchor: "Mục đích sử dụng:"}
+  - {key: du_an, label: Dự án / đề tài liên quan, type: text, required: false, anchor: "Dự án / đề tài liên quan:"}
+  - {key: dia_diem, label: Địa điểm sử dụng, type: text, anchor: "Địa điểm sử dụng:"}
+  - {key: ngay_muon, label: Mượn từ ngày, type: date, default: today, not_before: today, anchor: "Mượn từ ngày:"}
+  - {key: han_tra, label: Dự kiến trả ngày, type: date, after: ngay_muon, anchor: "Dự kiến trả ngày:"}
+
+  # III. DANH SÁCH THIẾT BỊ
+  - key: thiet_bi
+    label: Danh sách thiết bị
+    type: table
+    anchor: "III. DANH SÁCH THIẾT BỊ"     # bảng STT đầu tiên sau đoạn này
+    min_rows: 1
+    max_rows: 20
+    rules: [so_luong_khong_vuot_con_lai]
+    columns:
+      - {key: stt, label: STT, type: row_number}
+      - {key: ten_tb, label: Tên thiết bị, type: equipment_ref, hint: "Tên hoặc mã thiết bị (vd 'máy chiếu', 'TB001')."}
+      - {key: ma_tb, label: "Mã / Số serial", type: text, derived_from: ten_tb.ma_tb}
+      - {key: so_luong, label: SL, type: int, min: 1, default: 1}
+      - {key: tinh_trang, label: Tình trạng khi mượn, type: text, derived_from: ten_tb.tinh_trang}
+      - {key: ghi_chu, label: Ghi chú, type: text, required: false}
+
+  # V. XÁC NHẬN TRẢ THIẾT BỊ — người quản lý thiết bị ghi tay
+  - {key: ngay_tra, label: Ngày trả, type: date, required: false, filled_by: lab}
+  - {key: tinh_trang_khi_tra, label: Tình trạng khi trả, type: text, required: false, filled_by: lab}
+
+signatures:
+  - {label: "NGƯỜI MƯỢN", field: ho_ten}
+  - {label: "NGƯỜI QUẢN LÝ THIẾT BỊ"}
+  - {label: "TRƯỞNG PHÒNG THÍ NGHIỆM"}
+
+output:
+  format: pdf
+  folder: "submissions/equipment-requests/{today:%Y-%m}"
+  filename: "{today:%Y-%m-%d}_{ho_ten_ascii}_{ma_phieu}"
+  versioning: true

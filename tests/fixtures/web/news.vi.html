@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News | ISI Lab</title>
+    <meta name="description" content="ISI Lab - Intelligent System and IoT Laboratory at VNU International School. Research in AI, IoT, Robotics, UAV, and Automation.">
+    <link rel="icon" type="image/png" href="/public/assets/logo-light.png">
+    <link rel="shortcut icon" href="/public/assets/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/site.css">
+
+    <meta name="csrf-token" content="9b7bec3d6196179e57c97fac8611f0c2d38bcc20a93b8540b4a307b6f33214a5">
+</head>
+<body class="page-news">
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="ISI Lab Home">
+                <img src="/public/assets/logo-light.png" alt="ISI Lab" class="header-logo-img logo-light">
+                <img src="/public/assets/logo-dark.png" alt="ISI Lab" class="header-logo-img logo-dark">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/"             class="nav-link "         data-i18n="nav.home">Home</a></li>
+                <li><a href="/research"     class="nav-link "     data-i18n="nav.research">Research</a></li>
+                <li><a href="/members"      class="nav-link "      data-i18n="nav.members">Members</a></li>
+                <li><a href="/projects"     class="nav-link "     data-i18n="nav.projects">Projects</a></li>
+                <li><a href="/publications" class="nav-link " data-i18n="nav.publications">Publications</a></li>
+                <li><a href="/news"         class="nav-link active"         data-i18n="nav.news">News</a></li>
+                <li><a href="/gallery"      class="nav-link "      data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="/contact"      class="nav-link "      data-i18n="nav.contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="lang-toggle" id="langSwitch" href="/news?lang=en" title="Switch to English" aria-label="Switch to English">
+                    <span class="lang-current">VI</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-hero">
+    <div class="container">
+        <div class="crumbs">
+            Trang chủ / Tin tức        </div>
+        <h1 data-i18n="news.title">News &amp; Activities</h1>
+        <p class="subtitle" data-i18n="news.subtitle">Stay updated with our latest activities</p>
+    </div>
+</section>
+
+<section class="section section-news" style="padding-top:50px">
+    <div class="container">
+                <div class="news-grid">
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="news-image">
+                    <img src="https://via.placeholder.com/800x600/1976d2/ffffff?text=News" alt="ISILAB và Bell System24 Vietnam: Kết nối cơ hội hợp tác đào tạo và nghiên cứu">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> 15/10/2026</div>
+                    <h3 class="news-title">
+                        <a href="/news/isilab-and-bell-system24-vietnam-exploring-opportunities-in-education-and-research" style="color:inherit;text-decoration:none">ISILAB và Bell System24 Vietnam: Kết nối cơ hội hợp tác đào tạo và nghiên cứu</a>
+                    </h3>
+                    <p class="news-excerpt">ISILAB – Trường Quốc tế, ĐHQGHN gặp gỡ Bell System24 Vietnam thông qua kết nối của Tập đoàn ITOCHU,</p>
+                    <a href="/news/isilab-and-bell-system24-vietnam-exploring-opportunities-in-education-and-research" class="pub-link" style="margin-top:10px;display:inline-block">
+                        Đọc tiếp <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="60">
+                <div class="news-image">
+                    <img src="https://via.placeholder.com/800x600/1976d2/ffffff?text=News" alt="Hợp tác, phát triển với Công ty Hybrid Techonolgy, ITOCHU, GI Cloud - Nhật Bản">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> 10/09/2026</div>
+                    <h3 class="news-title">
+                        <a href="/news/partnership-and-development-with-hybrid-technology-co-itochu-and-gi-cloud-japan" style="color:inherit;text-decoration:none">Hợp tác, phát triển với Công ty Hybrid Techonolgy, ITOCHU, GI Cloud - Nhật Bản</a>
+                    </h3>
+                    <p class="news-excerpt">ISI LAB tăng cường hợp tác với Hybrid Technologies, ITOCHU và GI Cloud (Nhật Bản) để phát triển công nghệ, AI và nhân lực</p>
+                    <a href="/news/partnership-and-development-with-hybrid-technology-co-itochu-and-gi-cloud-japan" class="pub-link" style="margin-top:10px;display:inline-block">
+                        Đọc tiếp <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="120">
+                <div class="news-image">
+                    <img src="/uploads/news/news-20260729-182944-92338f85-85a0-4786-934b-7fcd16b3891a-665e35b9.png" alt="Workshop Về Iot và Tự Động Hóa">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> 23/07/2026</div>
+                    <h3 class="news-title">
+                        <a href="/news/new-lab-equipment" style="color:inherit;text-decoration:none">Workshop Về Iot và Tự Động Hóa</a>
+                    </h3>
+                    <p class="news-excerpt">ISILAB tổ chức workshop đào tạo hệ thống định vị trong nhà ITS cùng MIMOS (Malaysia) và các doanh nghiệp Việt Nam, tạo cơ hội cho sinh viên thực hành triển khai hệ thống và trao đổi giải pháp cho các bài toán thực tế trong công nghiệp.</p>
+                    <a href="/news/new-lab-equipment" class="pub-link" style="margin-top:10px;display:inline-block">
+                        Đọc tiếp <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="180">
+                <div class="news-image">
+                    <img src="/uploads/news/news-20260805-153126-Screenshot-2026-08-03-175516-1ff3fbe6.png" alt="Nghiên cứu khoa học">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> 25/04/2026</div>
+                    <h3 class="news-title">
+                        <a href="/news/innovation-award-2024" style="color:inherit;text-decoration:none">Nghiên cứu khoa học</a>
+                    </h3>
+                    <p class="news-excerpt">Lễ bảo vệ nghiên cứu khoa học của sinh viên ISI Lab tại Trường Quốc tế - ĐHQGHN</p>
+                    <a href="/news/innovation-award-2024" class="pub-link" style="margin-top:10px;display:inline-block">
+                        Đọc tiếp <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="240">
+                <div class="news-image">
+                    <img src="/uploads/news/news-20260805-153133-Screenshot-2026-08-03-180405-38b1274a.png" alt="Thành quả nghiên cứu của sinh viên">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> 09/05/2024</div>
+                    <h3 class="news-title">
+                        <a href="/news/annual-tech-showcase-2024" style="color:inherit;text-decoration:none">Thành quả nghiên cứu của sinh viên</a>
+                    </h3>
+                    <p class="news-excerpt">Các sinh viên từ ISI Lab đã đạt giải thưởng về nghiên cứu khoa học sinh viên</p>
+                    <a href="/news/annual-tech-showcase-2024" class="pub-link" style="margin-top:10px;display:inline-block">
+                        Đọc tiếp <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+                    </div>
+            </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-main">ISI</span>
+                            <span class="logo-sub">LAB</span>
+                        </div>
+                    </div>
+                    <p data-i18n="footer.about">Intelligent System and IoT Laboratory - Pioneering research in AI, IoT, Robotics and UAV systems.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.links">Quick Links</h4>
+                    <ul>
+                        <li><a href="/"        data-i18n="nav.home">Home</a></li>
+                        <li><a href="/research" data-i18n="nav.research">Research</a></li>
+                        <li><a href="/members" data-i18n="nav.members">Members</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.explore">Explore</h4>
+                    <ul>
+                        <li><a href="/projects"     data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="/publications" data-i18n="nav.publications">Publications</a></li>
+                        <li><a href="/news"         data-i18n="nav.news">News</a></li>
+                        <li><a href="/gallery"      data-i18n="nav.gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contact">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Khoa Quốc tế - ĐHQGHN, 1 Phan Tây Nhạc, Xuân Phương, Hà Nội</span></li>
+                        <li><i class="fas fa-envelope"></i> <span></span></li>
+                        <li><i class="fas fa-phone"></i> <span></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ISI Lab. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p><a href="/admin/login" class="admin-link"><i class="fas fa-lock"></i> <span data-i18n="footer.admin">Admin</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" alt="">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        window.SITE_URL = "";
+        window.ISILAB_LANG = "vi";
+    </script>
+    <script src="/public/js/i18n.js?v=1785535130"></script>
+    <script src="/public/js/particles.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>

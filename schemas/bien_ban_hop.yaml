@@ -1,0 +1,60 @@
+# Biên bản họp — viết tay theo mẫu templates/BienBanHop (TK §7.1, §8.4).
+# Ngày họp = dòng "Hà Nội, ngày … tháng … năm …" đầu biên bản (mẫu không có dòng "Ngày họp" riêng).
+form_id: bien_ban_hop
+version: "2026-10-19"
+title: Biên bản họp
+description: Thư ký (hoặc leader) gửi ghi chú/transcript cuộc họp, trợ lý điền biên bản theo mẫu và lưu vào kho tài liệu nội bộ.
+roles: [thu_ki, leader, admin]
+hook: meeting_minutes
+template:
+  drive_path: templates/BienBanHop
+
+fields:
+  - {key: ngay_hop, label: Ngày họp, type: date, default: today, not_after: today,
+     anchor: "Hà Nội, ngày … tháng … năm …", blank: date_parts,
+     hint: "Mặc định hôm nay. Nếu ghi chú cho thấy họp hôm khác, hỏi lại người dùng trước khi điền."}
+
+  # I. THỜI GIAN, ĐỊA ĐIỂM
+  - {key: gio_bat_dau, label: Giờ bắt đầu, type: time, anchor: "Thời gian bắt đầu:"}
+  - {key: hinh_thuc, label: Hình thức, type: choice, options: [Trực tiếp, Trực tuyến, Kết hợp], anchor: "Hình thức:"}
+  - {key: dia_diem, label: Địa điểm / đường dẫn họp, type: text, anchor: "Địa điểm / đường dẫn họp:"}
+
+  # II. THÀNH PHẦN THAM DỰ
+  - {key: chu_tri, label: Chủ trì, type: member_ref, default: leader, allow_admin: true, anchor: "Chủ trì:"}
+  - {key: thu_ky, label: Thư ký, type: member_ref, default: account.ho_ten, anchor: "Thư ký:"}
+  - {key: thanh_vien_tham_du, label: Thành viên tham dự, type: member_ref, multiple: true, allow_unknown: true,
+     allow_admin: true, anchor: "Thành viên tham dự:"}
+  - {key: vang_mat, label: Vắng mặt, type: member_ref, multiple: true, required: false,
+     suggest: "members_except:thanh_vien_tham_du", anchor: "Vắng mặt:",
+     hint: "Hệ thống tự đề xuất = thành viên trong Members trừ người tham dự; chỉ điền khi người dùng sửa."}
+
+  # III–IV
+  - {key: noi_dung, label: Nội dung cuộc họp, type: longtext, anchor: "III. NỘI DUNG CUỘC HỌP", blank: next_line}
+  - {key: ket_luan, label: Kết luận của chủ trì, type: longtext, anchor: "IV. KẾT LUẬN CỦA CHỦ TRÌ", blank: next_line}
+
+  # V. PHÂN CÔNG CÔNG VIỆC
+  - key: phan_cong
+    label: Phân công công việc
+    type: table
+    anchor: "V. PHÂN CÔNG CÔNG VIỆC"
+    min_rows: 0
+    max_rows: 40
+    required: false
+    columns:
+      - {key: stt, label: STT, type: row_number}
+      - {key: noi_dung, label: Nội dung công việc, type: text}
+      - {key: nguoi_phu_trach, label: Người phụ trách, type: member_ref}
+      - {key: han_hoan_thanh, label: Hạn hoàn thành, type: date, required: false, not_before: ngay_hop}
+
+  - {key: gio_ket_thuc, label: Giờ kết thúc, type: time, after: gio_bat_dau, anchor: "kết thúc vào lúc",
+     blank: ellipsis}
+
+signatures:
+  - {label: "THƯ KÝ", field: thu_ky}
+  - {label: "CHỦ TRÌ", field: chu_tri}
+
+output:
+  format: gdoc                       # Google Doc: sửa được và được index vào KB nội bộ
+  folder: "kb/internal/meeting-minutes"
+  filename: "{ngay_hop:%Y-%m-%d}_BienBanHop"
+  versioning: true

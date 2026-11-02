@@ -1,0 +1,34 @@
+# Hạ tầng cho môi trường dev: chỉ Postgres + Qdrant. App chạy trực tiếp trên máy.
+# Chạy: docker compose -f deploy/compose.dev.yaml --env-file .env up -d
+name: labagent-dev
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: labagent
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-labagent}
+      POSTGRES_DB: labagent
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U labagent -d labagent"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.4
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}
+    ports:
+      - "127.0.0.1:6333:6333"
+    volumes:
+      - qdrant:/qdrant/storage
+
+volumes:
+  pgdata:
+  qdrant:

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Areas | ISI Lab</title>
+    <meta name="description" content="ISI Lab - Intelligent System and IoT Laboratory at VNU International School. Research in AI, IoT, Robotics, UAV, and Automation.">
+    <link rel="icon" type="image/png" href="/public/assets/logo-light.png">
+    <link rel="shortcut icon" href="/public/assets/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/site.css">
+
+    <meta name="csrf-token" content="ff0597feb9831233263319ae19df7066ab2a16388c972e80ed09fee3dc88f8de">
+</head>
+<body class="page-research">
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="ISI Lab Home">
+                <img src="/public/assets/logo-light.png" alt="ISI Lab" class="header-logo-img logo-light">
+                <img src="/public/assets/logo-dark.png" alt="ISI Lab" class="header-logo-img logo-dark">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/"             class="nav-link "         data-i18n="nav.home">Home</a></li>
+                <li><a href="/research"     class="nav-link active"     data-i18n="nav.research">Research</a></li>
+                <li><a href="/members"      class="nav-link "      data-i18n="nav.members">Members</a></li>
+                <li><a href="/projects"     class="nav-link "     data-i18n="nav.projects">Projects</a></li>
+                <li><a href="/publications" class="nav-link " data-i18n="nav.publications">Publications</a></li>
+                <li><a href="/news"         class="nav-link "         data-i18n="nav.news">News</a></li>
+                <li><a href="/gallery"      class="nav-link "      data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="/contact"      class="nav-link "      data-i18n="nav.contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="lang-toggle" id="langSwitch" href="/research?lang=en" title="Switch to English" aria-label="Switch to English">
+                    <span class="lang-current">VI</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-hero">
+    <div class="container">
+        <div class="crumbs">Home / Research</div>
+        <h1 data-i18n="research.title">Research Areas</h1>
+        <p class="subtitle" data-i18n="research.subtitle">Exploring the boundaries of technology and innovation</p>
+    </div>
+</section>
+
+<section class="section section-research" style="padding-top:60px">
+    <div class="container">
+                        <div class="research-grid">
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="research-icon"><i class="fas fa-map-location-dot"></i></div>
+                <h3 class="research-title">SLAM</h3>
+                <p class="research-desc">SLAM đã là chủ đề nghiên cứu kỹ thuật trong nhiều năm. Nhưng với những cải tiến to lớn về tốc độ xử lý của máy tính và sự sẵn có của các cảm biến chi phí thấp như camera và máy đo khoảng cách bằng laser, v.v.</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="80">
+                <div class="research-icon"><i class="fas fa-robot"></i></div>
+                <h3 class="research-title">Robot</h3>
+                <p class="research-desc">Robot công nghiệp là một hệ thống robot được sử dụng trong sản xuất. Robot công nghiệp được tự động hóa, có thể lập trình và có khả năng di chuyển trên ba trục trở lên. Các ứng dụng điển hình của robot bao gồm hàn, sơn...</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="160">
+                <div class="research-icon"><i class="fas fa-satellite-dish"></i></div>
+                <h3 class="research-title">Radar UWB</h3>
+                <p class="research-desc">Radar băng thông siêu rộng (radar UWB) truyền các tín hiệu thăm dò với phổ (băng tần) rộng hơn nhiều so với các loại radar thông thường. Chúng yêu cầu công suất xung thấp hơn rất nhiều, điều này làm cho máy phát radar không bị phát hiện.</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="240">
+                <div class="research-icon"><i class="fas fa-helicopter"></i></div>
+                <h3 class="research-title">Phương tiện bay không người lái</h3>
+                <p class="research-desc">UAV, thường được biết đến là drone, là một loại máy bay không có bất kỳ phi công, phi hành đoàn hoặc hành khách nào trên khoang. Chúng đã trở thành những tài sản thiết yếu đối với hầu hết các lực lượng quân đội.</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="320">
+                <div class="research-icon"><i class="fas fa-microchip"></i></div>
+                <h3 class="research-title">Thiết kế Phần cứng/Phần mềm</h3>
+                <p class="research-desc">IN 3D TIÊN TIẾN: Máy in 3D Dremel Digilab 3D45 Idea Builder là một trong những lựa chọn máy in 3D tốt nhất để in các vật liệu tiên tiến. Máy tương thích tốt với các loại sợi nhựa in (filament) như ECO-ABS, Nylon, PETG và PLA.</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="research-icon"><i class="fas fa-cube"></i></div>
+                <h3 class="research-title">Máy in 3D</h3>
+                <p class="research-desc">IN 3D TIÊN TIẾN: Máy in 3D Dremel Digilab 3D45 Idea Builder là một trong những lựa chọn máy in 3D tốt nhất để in các vật liệu tiên tiến. Máy tương thích tốt với các loại sợi nhựa in (filament) như ECO-ABS, Nylon, PETG và PLA.</p>
+            </div>
+                    </div>
+            </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-main">ISI</span>
+                            <span class="logo-sub">LAB</span>
+                        </div>
+                    </div>
+                    <p data-i18n="footer.about">Intelligent System and IoT Laboratory - Pioneering research in AI, IoT, Robotics and UAV systems.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.links">Quick Links</h4>
+                    <ul>
+                        <li><a href="/"        data-i18n="nav.home">Home</a></li>
+                        <li><a href="/research" data-i18n="nav.research">Research</a></li>
+                        <li><a href="/members" data-i18n="nav.members">Members</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.explore">Explore</h4>
+                    <ul>
+                        <li><a href="/projects"     data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="/publications" data-i18n="nav.publications">Publications</a></li>
+                        <li><a href="/news"         data-i18n="nav.news">News</a></li>
+                        <li><a href="/gallery"      data-i18n="nav.gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contact">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Khoa Quốc tế - ĐHQGHN, 1 Phan Tây Nhạc, Xuân Phương, Hà Nội</span></li>
+                        <li><i class="fas fa-envelope"></i> <span></span></li>
+                        <li><i class="fas fa-phone"></i> <span></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ISI Lab. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p><a href="/admin/login" class="admin-link"><i class="fas fa-lock"></i> <span data-i18n="footer.admin">Admin</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" alt="">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        window.SITE_URL = "";
+        window.ISILAB_LANG = "vi";
+    </script>
+    <script src="/public/js/i18n.js?v=1785535130"></script>
+    <script src="/public/js/particles.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>

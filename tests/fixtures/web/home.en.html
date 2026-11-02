@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI Lab - Intelligent System and IoT Laboratory</title>
+    <meta name="description" content="ISI Lab - Intelligent System and IoT Laboratory at VNU International School. Research in AI, IoT, Robotics, UAV, and Automation.">
+    <link rel="icon" type="image/png" href="/public/assets/logo-light.png">
+    <link rel="shortcut icon" href="/public/assets/logo.svg">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/site.css">
+
+    <meta name="csrf-token" content="b8f97a11d197d60cb10d1c86e70ecd5aab39a14c9a2564f0094faffc8325e504">
+</head>
+<body class="page-home">
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo" aria-label="ISI Lab Home">
+                <img src="/public/assets/logo-light.png" alt="ISI Lab" class="header-logo-img logo-light">
+                <img src="/public/assets/logo-dark.png" alt="ISI Lab" class="header-logo-img logo-dark">
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/"             class="nav-link active"         data-i18n="nav.home">Home</a></li>
+                <li><a href="/research"     class="nav-link "     data-i18n="nav.research">Research</a></li>
+                <li><a href="/members"      class="nav-link "      data-i18n="nav.members">Members</a></li>
+                <li><a href="/projects"     class="nav-link "     data-i18n="nav.projects">Projects</a></li>
+                <li><a href="/publications" class="nav-link " data-i18n="nav.publications">Publications</a></li>
+                <li><a href="/news"         class="nav-link "         data-i18n="nav.news">News</a></li>
+                <li><a href="/gallery"      class="nav-link "      data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="/contact"      class="nav-link "      data-i18n="nav.contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a class="lang-toggle" id="langSwitch" href="/?lang=vi" title="Chuyển sang tiếng Việt" aria-label="Chuyển sang tiếng Việt">
+                    <span class="lang-current">EN</span>
+                </a>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-- HERO -->
+<section id="home" class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+       
+        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+            <span class="title-line" data-i18n="hero.title1">Intelligent System</span>
+            <span class="title-line gradient-text" data-i18n="hero.title2">&amp; IoT Laboratory</span>
+        </h1>
+
+        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+            <a href="/research" class="btn btn-primary">
+                <span data-i18n="hero.btn1">Explore More</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="/contact" class="btn btn-outline">
+                <span data-i18n="hero.btn2">Join Us</span>
+                <i class="fas fa-user-plus"></i>
+            </a>
+        </div>
+
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="500">
+            <div class="stat-item">
+                <div class="stat-number" data-target="30">0</div>
+                <div class="stat-label" data-i18n="hero.stat1">Members</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="10">0</div>
+                <div class="stat-label" data-i18n="hero.stat2">Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label" data-i18n="hero.stat3">Publications</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="5">0</div>
+                <div class="stat-label" data-i18n="hero.stat4">Years</div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<!-- HIGHLIGHT: Research preview -->
+<section class="section section-research">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag" data-i18n="research.tag">Our Research</span>
+            <h2 class="section-title" data-i18n="research.title">Research Areas</h2>
+            <div class="section-line"></div>
+            <p class="section-subtitle" data-i18n="research.subtitle">Exploring the boundaries of technology and innovation</p>
+        </div>
+                <div class="research-grid">
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="research-icon"><i class="fas fa-map-location-dot"></i></div>
+                <h3 class="research-title">SLAM</h3>
+                <p class="research-desc">SLAM has been the subject of technical research for many years. But with vast improvements in computer processing speed and the availability of low-cost sensors such as cameras and laser range finders, etc</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="80">
+                <div class="research-icon"><i class="fas fa-robot"></i></div>
+                <h3 class="research-title">Robotics</h3>
+                <p class="research-desc">An industrial robot is a robot system used for manufacturing. Industrial robots are automated, programmable and capable of movement on three or more axes. Typical applications of robots include welding, painting,...</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="160">
+                <div class="research-icon"><i class="fas fa-satellite-dish"></i></div>
+                <h3 class="research-title">UWB Radar</h3>
+                <p class="research-desc">Ultra-wideband radar (UWB- radar) transmits exploratory signals with a much larger spectrum than conventional radars. They require much less pulse power, which makes the radar transmitter non-detectable.</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="240">
+                <div class="research-icon"><i class="fas fa-helicopter"></i></div>
+                <h3 class="research-title">Unmanned aerial vehicle</h3>
+                <p class="research-desc">UAV commonly known as a drone, is an aircraft without any human pilot, crew, or passengers on board. They had become essential assets to most militaries</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="320">
+                <div class="research-icon"><i class="fas fa-microchip"></i></div>
+                <h3 class="research-title">HW/SW Design</h3>
+                <p class="research-desc">ADVANCED 3D PRINTING: The Dremel Digilab 3D45 Idea Builder 3D printer is one of the best 3D printer options for printing advanced materials. It is ECO-ABS, Nylon, PETG and PLA filament friendly</p>
+            </div>
+                                    <div class="research-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="research-icon"><i class="fas fa-cube"></i></div>
+                <h3 class="research-title">3D printer</h3>
+                <p class="research-desc">ADVANCED 3D PRINTING: The Dremel Digilab 3D45 Idea Builder 3D printer is one of the best 3D printer options for printing advanced materials. It is ECO-ABS, Nylon, PETG and PLA filament friendly</p>
+            </div>
+                    </div>
+        <div style="text-align:center;margin-top:30px">
+            <a href="/research" class="btn btn-outline">
+                <span>View all</span><i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured projects -->
+<section class="section section-projects">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag" data-i18n="projects.tag">Our Work</span>
+            <h2 class="section-title" data-i18n="projects.title">Featured Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-211506-Screenshot-2026-09-08-211426-893cb334.png" alt="Research and Development of TinyML Techniques for UAV Applications with Intelligent Edge Processing and Multi-Sensor Fusion">
+                    <span class="project-tag">AI, UAV</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Research and Development of TinyML Techniques for UAV Applications with Intelligent Edge Processing and Multi-Sensor Fusion</h3>
+                    <p class="project-desc">The project focuses on deploying TinyML models for on-device Edge AI processing on resource-constrained UAV hardware, combined with Multi-Sensor Fusion. The research aims to enable UAVs to process and analyze data directly onboard, reducing dependence on external computing systems while supporting tasks such as flight-state recognition, image recognition, and real-time decision support. Through this approach, the project aims to develop intelligent, compact, and energy-efficient UAV systems suitable for practical applications.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2026 • In Progress</span>
+                        <a href="/projects/research-and-development-of-tinyml-techniques-for-uav-applications-with-intelligent-edge-processing-and-multi-sensor-fusion">View <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="70">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-195321-9555f86e-4457-4925-9314-1231224c3207---Copy-a3acc04f.png" alt="Research on viscoelastic imaging of soft tissues">
+                    <span class="project-tag">AI</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Research on viscoelastic imaging of soft tissues</h3>
+                    <p class="project-desc">The “Research on Viscoelastic Imaging of Soft Tissues” project focuses on developing imaging approaches to evaluate the mechanical characteristics of soft biological tissues, particularly their elastic and viscous behavior. By analyzing how tissues respond to mechanical deformation, the study aims to provide additional information beyond conventional structural imaging and support more quantitative tissue assessment. The project contributes to the development of non-invasive imaging methods with potential applications in biomedical research, tissue characterization, and future clinical diagnostic support.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2023 • </span>
+                        <a href="/projects/research-on-viscoelastic-imaging-of-soft-tissues">View <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                        <div class="project-card" data-aos="fade-up" data-aos-delay="140">
+                <div class="project-image">
+                    <img src="/uploads/projects/projects-20260908-193617-venergy_dien-mat-troi-nong-nghiep-co-duoc-tinh-la-dien-mat-troi-mai-nha-khong-cfbb45c6.jpeg" alt="Research, design and manufacture environmentally friendly agricultural-photovoltaic systems based on solar energy convergence technology">
+                    <span class="project-tag">Energy</span>
+                </div>
+                <div class="project-info">
+                    <h3 class="project-title">Research, design and manufacture environmentally friendly agricultural-photovoltaic systems based on solar energy convergence technology</h3>
+                    <p class="project-desc">The “Research, Design and Manufacture Environmentally Friendly Agricultural-Photovoltaic Systems Based on Solar Energy Convergence Technology” project focuses on developing an integrated agricultural-photovoltaic system that combines solar power generation with agricultural production. The research covers system design, prototype development, and evaluation of solutions that improve land-use efficiency while supporting clean energy generation. The project aims to create a sustainable and environmentally friendly model for modern agriculture.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar"></i> 2023 • </span>
+                        <a href="/projects/research-design-and-manufacture-environmentally-friendly-agricultural-photovoltaic-systems-based-on-solar-energy-convergence-technology">View <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+                    </div>
+        <div style="text-align:center;margin-top:30px">
+            <a href="/projects" class="btn btn-outline">
+                <span>All projects</span><i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Recent news -->
+<section class="section section-news">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <span class="section-tag" data-i18n="news.tag">Latest Updates</span>
+            <h2 class="section-title" data-i18n="news.title">News &amp; Activities</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="news-grid">
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="news-image">
+                    <img src="https://via.placeholder.com/800x600/1976d2/ffffff?text=News" alt="ISILAB and Bell System24 Vietnam: Exploring Opportunities in Education and Research">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> Oct 15, 2026</div>
+                    <h3 class="news-title"><a href="/news/isilab-and-bell-system24-vietnam-exploring-opportunities-in-education-and-research" style="color:inherit;text-decoration:none">ISILAB and Bell System24 Vietnam: Exploring Opportunities in Education and Research</a></h3>
+                    <p class="news-excerpt">Introduced by ITOCHU Corporation, ISILAB at VNU International School met with Bell System24 Vietnam</p>
+                </div>
+            </article>
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="70">
+                <div class="news-image">
+                    <img src="https://via.placeholder.com/800x600/1976d2/ffffff?text=News" alt="Partnership and development with Hybrid Technology Co., ITOCHU, and GI Cloud - Japan">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> Sep 10, 2026</div>
+                    <h3 class="news-title"><a href="/news/partnership-and-development-with-hybrid-technology-co-itochu-and-gi-cloud-japan" style="color:inherit;text-decoration:none">Partnership and development with Hybrid Technology Co., ITOCHU, and GI Cloud - Japan</a></h3>
+                    <p class="news-excerpt">ISI LAB strengthens ties with Hybrid Technologies, ITOCHU, and GI Cloud (Japan) to advance tech, AI, and HR collaboration</p>
+                </div>
+            </article>
+                        <article class="news-card" data-aos="fade-up" data-aos-delay="140">
+                <div class="news-image">
+                    <img src="/uploads/news/news-20260729-182944-92338f85-85a0-4786-934b-7fcd16b3891a-665e35b9.png" alt="IoT &amp; Automation Workshop">
+                </div>
+                <div class="news-info">
+                    <div class="news-date"><i class="far fa-calendar"></i> Jul 23, 2026</div>
+                    <h3 class="news-title"><a href="/news/new-lab-equipment" style="color:inherit;text-decoration:none">IoT &amp; Automation Workshop</a></h3>
+                    <p class="news-excerpt">ISILAB hosted an ITS technical training workshop with MIMOS, Malaysia, and Vietnamese industry partners, providing students with hands-on experience in system deployment and opportunities to explore practical solutions to industrial challenges.</p>
+                </div>
+            </article>
+                    </div>
+    </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-main">ISI</span>
+                            <span class="logo-sub">LAB</span>
+                        </div>
+                    </div>
+                    <p data-i18n="footer.about">Intelligent System and IoT Laboratory - Pioneering research in AI, IoT, Robotics and UAV systems.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.links">Quick Links</h4>
+                    <ul>
+                        <li><a href="/"        data-i18n="nav.home">Home</a></li>
+                        <li><a href="/research" data-i18n="nav.research">Research</a></li>
+                        <li><a href="/members" data-i18n="nav.members">Members</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.explore">Explore</h4>
+                    <ul>
+                        <li><a href="/projects"     data-i18n="nav.projects">Projects</a></li>
+                        <li><a href="/publications" data-i18n="nav.publications">Publications</a></li>
+                        <li><a href="/news"         data-i18n="nav.news">News</a></li>
+                        <li><a href="/gallery"      data-i18n="nav.gallery">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer.contact">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> <span>VNU International School, 1 Phan Tay Nhac, Xuan Phuong, Hanoi</span></li>
+                        <li><i class="fas fa-envelope"></i> <span></span></li>
+                        <li><i class="fas fa-phone"></i> <span></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 ISI Lab. <span data-i18n="footer.rights">All rights reserved.</span></p>
+                <p><a href="/admin/login" class="admin-link"><i class="fas fa-lock"></i> <span data-i18n="footer.admin">Admin</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" alt="">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        window.SITE_URL = "";
+        window.ISILAB_LANG = "en";
+    </script>
+    <script src="/public/js/i18n.js?v=1785535130"></script>
+    <script src="/public/js/particles.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>

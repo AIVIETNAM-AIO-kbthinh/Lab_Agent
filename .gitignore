@@ -1,0 +1,52 @@
+# --- Secrets: KHÔNG BAO GIỜ commit ---
+.env
+.env.*
+!.env.example
+secrets/
+credentials.json
+token.json
+client_secret*.json
+*.pem
+*.key
+
+# --- Cấu hình riêng của từng lab (email admin, ID Drive): chỉ commit config.example.yaml ---
+config.yaml
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# --- Công cụ ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# --- Dữ liệu runtime (DB, vector store, file tạm, upload, render) ---
+var/
+data_local/
+*.sqlite3
+*.db
+qdrant_storage/
+logs/
+*.log
+
+# --- Fixture có thể chứa dữ liệu thật: chỉ commit sau khi đã ẩn danh ---
+tests/fixtures/private/
+
+# --- Editor / OS ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

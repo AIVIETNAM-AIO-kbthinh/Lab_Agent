@@ -1,0 +1,464 @@
+# Bộ eval RAG cho KB (website lab + tài liệu Drive). Chạy: `labagent eval rag` (xem tests/eval/run_rag_eval.py).
+# Câu hỏi soạn từ nội dung đã crawl/index ngày 2026-10-19 (78 trang isilab.click vi+en, Nội quy ISILAB trên Drive).
+# Website hoặc nội quy đổi thì cập nhật lại key_points.
+#
+# Trường:
+#   cat         nhóm câu hỏi (để thống kê theo nhóm)
+#   role        guest | member (vai trò hỏi; retriever lọc quyền theo role)
+#   kind        answer (mặc định) = phải trả lời đúng
+#               refuse            = KB không có thông tin: phải nói là không có, không bịa
+#               no_leak           = khách hỏi nội dung nội bộ: không được lộ (cả trong chunk truy xuất lẫn câu trả lời)
+#   sources     chuỗi con của `location` (URL hoặc đường dẫn Drive) chứa đáp án; khớp một cái là đạt (retrieval)
+#   key_points  mỗi phần tử là một nhóm phương án; phải có ít nhất 1 phương án của MỖI nhóm
+#               (so khớp không dấu, không phân biệt hoa thường, bỏ ký tự markdown)
+#   leak        (no_leak) các chuỗi nội bộ không được xuất hiện
+#   must_not    regex không được xuất hiện trong câu trả lời
+
+# ------------------------------------------------------------------ Hướng nghiên cứu
+- id: rs01
+  cat: research
+  role: guest
+  q: "ISI Lab nghiên cứu những lĩnh vực nào?"
+  sources: ["/research", "isilab.click/?lang"]
+  key_points: [["slam"], ["robot"], ["uwb"], ["uav", "drone", "bay khong nguoi lai"]]
+- id: rs02
+  cat: research
+  role: guest
+  q: "Radar UWB mà lab nghiên cứu có đặc điểm gì?"
+  sources: ["/research", "isilab.click/?lang"]
+  key_points: [["bang thong sieu rong", "ultra-wideband", "ultra wideband", "pho", "spectrum", "bang tan"], ["cong suat", "power"]]
+- id: rs03
+  cat: research
+  role: guest
+  q: "Lab có máy in 3D loại nào và in được những loại nhựa gì?"
+  sources: ["/research", "isilab.click/?lang"]
+  key_points: [["dremel", "3d45"], ["pla"], ["petg"]]
+- id: rs04
+  cat: research
+  role: guest
+  q: "What research areas does the lab work on?"
+  sources: ["/research", "isilab.click/?lang"]
+  key_points: [["slam"], ["robot"], ["uwb"], ["uav", "drone", "unmanned"]]
+
+# ------------------------------------------------------------------ Thành viên (công khai trên website)
+- id: pp01
+  cat: people
+  role: guest
+  q: "Trưởng lab là ai?"
+  sources: ["/members/khoa-nguyen-dang", "/members?lang"]
+  key_points: [["khoa"]]
+- id: pp02
+  cat: people
+  role: guest
+  q: "Trưởng lab tốt nghiệp tiến sĩ ở đâu, năm nào?"
+  sources: ["/members/khoa-nguyen-dang", "/members?lang"]
+  key_points: [["ulsan"], ["2018"]]
+- id: pp03
+  cat: people
+  role: guest
+  q: "Thầy Bùi Thanh Tùng có bao nhiêu năm kinh nghiệm?"
+  sources: ["/members/tung-bui-thanh", "/members?lang"]
+  key_points: [["15"]]
+- id: pp04
+  cat: people
+  role: guest
+  q: "Cô Phạm Hải Yến nghiên cứu về lĩnh vực gì?"
+  sources: ["/members/pham-hai-yen", "/members?lang"]
+  key_points: [["iot"], ["nhung", "embedded"]]
+- id: pp05
+  cat: people
+  role: guest
+  q: "Thành viên nào trong lab nghiên cứu về TinyML và Edge AI?"
+  sources: ["/members/student-4", "/members?lang"]
+  key_points: [["dao hoang trung"]]
+- id: pp06
+  cat: people
+  role: guest
+  q: "Kiều Bá Thịnh học ngành gì và quan tâm đến lĩnh vực nào?"
+  sources: ["/members/kieu-ba-thinh", "/members?lang"]
+  key_points: [["cong nghe thong tin", "information technology"], ["agent", "llm", "ngon ngu lon", "language model"]]
+- id: pp07
+  cat: people
+  role: guest
+  q: "Lê Quang Huy có kinh nghiệm với những công cụ nào?"
+  sources: ["/members/le-quang-huy", "/members?lang"]
+  key_points: [["ros"], ["px4"], ["gazebo"]]
+- id: pp08
+  cat: people
+  role: guest
+  q: "Thành viên nào của lab học ở Đại học FPT?"
+  sources: ["/members/student-3", "/members?lang"]
+  key_points: [["kiet"]]
+- id: pp09
+  cat: people
+  role: guest
+  q: "Which lab member studies at Swinburne University of Technology?"
+  sources: ["/members/do-trinh-thuan-minh", "/members?lang"]
+  key_points: [["thuan minh"]]
+- id: pp10
+  cat: people
+  role: guest
+  q: "Phạm Ngọc Tùng đam mê lĩnh vực gì?"
+  sources: ["/members/student-2", "/members?lang"]
+  key_points: [["iot", "internet van vat", "internet of things"], ["ban dan", "semiconductor"]]
+- id: pp11
+  cat: people
+  role: guest
+  q: "Phan Đức Hiếu là sinh viên năm mấy, học trường nào?"
+  sources: ["/members/phan-duc-hieu", "/members?lang"]
+  key_points: [["nam hai", "nam 2", "nam thu hai", "second"], ["uet", "dai hoc cong nghe", "engineering and technology"]]
+- id: pp12
+  cat: people
+  role: guest
+  q: "La Quang Hải học trường nào?"
+  sources: ["/members/student?lang", "/members?lang"]
+  key_points: [["bach khoa", "hust"]]
+- id: pp13
+  cat: people
+  role: guest
+  q: "Who are the lecturers of the lab?"
+  sources: ["/members/tung-bui-thanh", "/members/pham-hai-yen", "/members?lang"]
+  key_points: [["tung"], ["yen"]]
+- id: pp14
+  cat: people
+  role: guest
+  q: "Đỗ Thùy Trang quan tâm đến lĩnh vực gì?"
+  sources: ["/members/do-thuy-trang", "/members?lang"]
+  key_points: [["y sinh", "biomedical"]]
+
+# ------------------------------------------------------------------ Dự án
+- id: pj01
+  cat: projects
+  role: guest
+  q: "Dự án ITS của lab là gì, hợp tác với đơn vị nào?"
+  sources: ["/projects/customizable-indoor-tracking", "/projects?lang", "/news/new-lab-equipment"]
+  key_points: [["mimos"], ["dinh vi", "tracking", "theo doi"]]
+- id: pj02
+  cat: projects
+  role: guest
+  q: "Dự án ITS được tổ chức nào hỗ trợ kinh phí?"
+  sources: ["/projects/customizable-indoor-tracking", "/projects?lang", "/news/new-lab-equipment"]
+  key_points: [["nict", "national institute of information and communications technology", "vien cong nghe thong tin va truyen thong"]]
+- id: pj03
+  cat: projects
+  role: guest
+  q: "Lab có dự án nào về đo nhịp tim không?"
+  sources: ["/projects/research-and-develop-the-remote-heart-rate", "/projects?lang"]
+  key_points: [["radar"], ["khong tiep xuc", "tu xa", "non-contact", "remote", "contactless"]]
+- id: pj04
+  cat: projects
+  role: guest
+  q: "Dự án mũi điện tử của lab dùng loại cảm biến gì?"
+  sources: ["/projects/a-study-on-development-of-electronic-noses", "/projects?lang"]
+  key_points: [["mos", "oxit kim loai", "metal oxide"]]
+- id: pj05
+  cat: projects
+  role: guest
+  q: "Dự án giám sát chất lượng nước của lab dùng thiết bị gì?"
+  sources: ["/projects/research-techniques-and-management-devices", "/projects?lang"]
+  key_points: [["drone", "uav", "bay khong nguoi lai"]]
+- id: pj06
+  cat: projects
+  role: guest
+  q: "What is the lab's TinyML project about?"
+  sources: ["/projects/research-and-development-of-tinyml", "/projects?lang", "isilab.click/?lang"]
+  key_points: [["tinyml"], ["uav"]]
+- id: pj07
+  cat: projects
+  role: guest
+  q: "Dự án quang điện - nông nghiệp của lab hướng tới mục tiêu gì?"
+  sources: ["/projects/research-design-and-manufacture", "/projects?lang", "isilab.click/?lang"]
+  key_points: [["mat troi", "solar", "nang luong sach", "nang luong tai tao"], ["nong nghiep", "agricultur"]]
+- id: pj08
+  cat: projects
+  role: guest
+  q: "Dự án cảm biến ảo cho UAV quadrotor nghiên cứu điều gì?"
+  sources: ["/projects/studying-the-virtual-sensor", "/projects?lang"]
+  key_points: [["uoc luong", "estimat"], ["trang thai", "state"]]
+- id: pj09
+  cat: projects
+  role: guest
+  q: "Lab có nghiên cứu về kiểm tra không phá hủy không?"
+  sources: ["/projects/nondestructive-evaluation", "/projects?lang"]
+  key_points: [["nhieu lop", "multilayer", "multi-layer"]]
+- id: pj10
+  cat: projects
+  role: guest
+  q: "Dự án tạo ảnh mô mềm nghiên cứu những đặc tính nào?"
+  sources: ["/projects/research-on-viscoelastic-imaging", "/projects?lang", "isilab.click/?lang"]
+  key_points: [["dan hoi", "elastic"], ["nhot", "viscous", "viscoelastic"]]
+- id: pj11
+  cat: projects
+  role: guest
+  q: "Lab hiện có những dự án nổi bật nào?"
+  sources: ["/projects?lang", "isilab.click/?lang"]
+  key_points: [["its", "indoor tracking", "dinh vi trong nha"], ["tinyml", "hoc may sieu nhe"]]
+
+# ------------------------------------------------------------------ Tin tức
+- id: nw01
+  cat: news
+  role: guest
+  q: "Tin tức mới nhất của lab là gì?"
+  sources: ["/news/isilab-and-bell-system24", "/news?lang", "isilab.click/?lang"]
+  key_points: [["bell system"]]
+- id: nw02
+  cat: news
+  role: guest
+  q: "Workshop về IoT và Tự động hóa được tổ chức vào ngày nào?"
+  sources: ["/news/new-lab-equipment"]
+  key_points: [["23"], ["/7", "/07", "thang 7", "july", "jul"]]
+- id: nw03
+  cat: news
+  role: guest
+  q: "Trong workshop ITS, sinh viên được thực hành những nội dung gì?"
+  sources: ["/news/new-lab-equipment"]
+  key_points: [["uwb"], ["gateway"]]
+- id: nw04
+  cat: news
+  role: guest
+  q: "Lab đã gặp gỡ những doanh nghiệp Nhật Bản nào?"
+  sources: ["/news/partnership-and-development", "/news/isilab-and-bell-system24", "/news?lang"]
+  key_points: [["hybrid"], ["itochu"], ["gi cloud"]]
+- id: nw05
+  cat: news
+  role: guest
+  q: "Trong buổi gặp Hybrid Technologies, ITOCHU và GI Cloud, lab đã giới thiệu những hệ thống nào?"
+  sources: ["/news/partnership-and-development"]
+  key_points: [["indoor tracking", "dinh vi trong nha", "its"], ["diem danh", "attendance"], ["bien so", "license plate"]]
+- id: nw06
+  cat: news
+  role: guest
+  q: "Sinh viên ISI Lab đạt giải gì trong cuộc thi Nghiên cứu khoa học sinh viên?"
+  sources: ["/news/annual-tech-showcase-2024"]
+  key_points: [["giai nhat", "first"], ["giai ba", "third"]]
+- id: nw07
+  cat: news
+  role: guest
+  q: "Lễ bảo vệ nghiên cứu khoa học của sinh viên ISI Lab diễn ra khi nào?"
+  sources: ["/news/innovation-award-2024"]
+  key_points: [["25/04/2026", "25/4/2026", "25 thang 4", "april 25", "apr 25", "25/04", "25/4"]]
+- id: nw08
+  cat: news
+  role: guest
+  q: "Ai đã giới thiệu Bell System24 Vietnam với ISILAB?"
+  sources: ["/news/isilab-and-bell-system24", "/news?lang", "isilab.click/?lang"]
+  key_points: [["itochu"]]
+- id: nw09
+  cat: news
+  role: guest
+  q: "When did ISILAB meet Hybrid Technologies, ITOCHU and GI Cloud?"
+  sources: ["/news/partnership-and-development"]
+  key_points: [["10/09/2026", "10/9/2026", "sep 10", "september 10", "10 sep", "10 thang 9", "10/09", "10/9"]]
+
+# ------------------------------------------------------------------ Công bố khoa học
+- id: pb01
+  cat: publications
+  role: guest
+  q: "Lab đã công bố bài trên những tạp chí nào?"
+  sources: ["/publications"]
+  key_points: [["ieee"]]
+- id: pb02
+  cat: publications
+  role: guest
+  q: "Năm 2026 lab có những bài báo nào?"
+  sources: ["/publications"]
+  key_points: [["hand gesture", "fmcw"], ["occupancy"], ["quadrotor"]]
+- id: pb03
+  cat: publications
+  role: guest
+  q: "Bài báo về nhận dạng cử chỉ tay bằng radar FMCW được đăng ở tạp chí nào?"
+  sources: ["/publications"]
+  key_points: [["aerospace and electronic systems"]]
+- id: pb04
+  cat: publications
+  role: guest
+  q: "Bài 'IoT-based Smart Greenhouse Monitoring System' do ai viết?"
+  sources: ["/publications"]
+  key_points: [["yen"], ["thanh"]]
+- id: pb05
+  cat: publications
+  role: guest
+  q: "Which paper of the lab is about stroke prediction, and where was it published?"
+  sources: ["/publications"]
+  key_points: [["stroke"], ["icisn", "intelligent systems and networks"]]
+- id: pb06
+  cat: publications
+  role: guest
+  q: "Lab có bài báo nào về phát hiện ăn mòn trong kết cấu máy bay không?"
+  sources: ["/publications"]
+  key_points: [["corrosion", "an mon"], ["applied sciences"]]
+
+# ------------------------------------------------------------------ Liên hệ
+- id: ct01
+  cat: contact
+  role: guest
+  q: "Lab ở đâu, mình muốn đến trực tiếp?"
+  sources: ["/contact"]
+  key_points: [["phan tay nhac"]]
+- id: ct02
+  cat: contact
+  role: guest
+  q: "Giờ làm việc của lab thế nào?"
+  sources: ["/contact"]
+  key_points: [["8:00", "8h", "8 gio"], ["17:00", "17h", "17 gio", "5 gio chieu"]]
+- id: ct03
+  cat: contact
+  role: guest
+  q: "What is the lab's address?"
+  sources: ["/contact"]
+  key_points: [["phan tay nhac"]]
+
+# ------------------------------------------------------------------ Nội quy: chương CÔNG KHAI (khách hỏi được)
+- id: rp01
+  cat: rules_public
+  role: guest
+  q: "Điều kiện để gia nhập lab là gì?"
+  sources: ["Nội quy"]
+  key_points: [["nam thu 2", "nam 2", "nam thu hai"], ["2.8", "2,8"], ["10 gio"]]
+- id: rp02
+  cat: rules_public
+  role: guest
+  q: "Hồ sơ xin gia nhập lab gồm những gì?"
+  sources: ["Nội quy"]
+  key_points: [["don xin gia nhap", "donxingianhap"], ["cv"], ["bang diem"]]
+- id: rp03
+  cat: rules_public
+  role: guest
+  q: "Lab tuyển thành viên vào thời gian nào trong năm?"
+  sources: ["Nội quy"]
+  key_points: [["thang 3"], ["thang 9"]]
+- id: rp04
+  cat: rules_public
+  role: guest
+  q: "Thời gian thử việc ở lab là bao lâu?"
+  sources: ["Nội quy"]
+  key_points: [["8 tuan"]]
+- id: rp05
+  cat: rules_public
+  role: guest
+  q: "Có được ăn uống trong lab không?"
+  sources: ["Nội quy"]
+  key_points: [["pantry"]]
+- id: rp06
+  cat: rules_public
+  role: guest
+  q: "Pin drone phải được bảo quản như thế nào?"
+  sources: ["Nội quy"]
+  key_points: [["chong chay"]]
+- id: rp07
+  cat: rules_public
+  role: guest
+  q: "Nội quy lab có hiệu lực từ ngày nào?"
+  sources: ["Nội quy"]
+  key_points: [["01/10/2026", "1/10/2026", "1 thang 10"]]
+- id: rp08
+  cat: rules_public
+  role: guest
+  q: "Thành viên muốn rời lab cần làm những gì?"
+  sources: ["Nội quy"]
+  key_points: [["2 tuan"], ["ban giao"]]
+
+# ------------------------------------------------------------------ Nội quy: chương NỘI BỘ (thành viên hỏi)
+- id: ri01
+  cat: rules_internal
+  role: member
+  q: "Thứ Bảy lab mở cửa từ mấy giờ đến mấy giờ?"
+  sources: ["Nội quy"]
+  key_points: [["8h00", "8:00", "8h", "8 gio"], ["17h00", "17:00", "17h", "17 gio"]]
+- id: ri02
+  cat: rules_internal
+  role: member
+  q: "Mỗi người được mượn tối đa bao nhiêu thiết bị cùng lúc?"
+  sources: ["Nội quy"]
+  key_points: [["3 thiet bi", "toi da 3", "3 devices", "ba thiet bi"]]
+- id: ri03
+  cat: rules_internal
+  role: member
+  q: "Mượn drone thì được mượn tối đa bao nhiêu ngày và ai duyệt?"
+  sources: ["Nội quy"]
+  key_points: [["7 ngay"], ["truong lab"]]
+- id: ri04
+  cat: rules_internal
+  role: member
+  q: "Mỗi phiên dùng máy chủ GPU được chạy tối đa bao lâu?"
+  sources: ["Nội quy"]
+  key_points: [["48 gio", "48h", "48 tieng"]]
+- id: ri05
+  cat: rules_internal
+  role: member
+  q: "Họp định kỳ của lab diễn ra vào lúc nào?"
+  sources: ["Nội quy"]
+  key_points: [["thu nam", "thu 5"], ["14h", "14:00", "14 gio"]]
+- id: ri06
+  cat: rules_internal
+  role: member
+  q: "Hạn nộp báo cáo tuần là khi nào?"
+  sources: ["Nội quy"]
+  key_points: [["23h59", "23:59"], ["chu nhat"]]
+- id: ri07
+  cat: rules_internal
+  role: member
+  q: "Trả thiết bị muộn thì bị xử lý thế nào?"
+  sources: ["Nội quy"]
+  key_points: [["3 ngay"]]
+- id: ri08
+  cat: rules_internal
+  role: member
+  q: "Vi phạm nào thì bị chấm dứt tư cách thành viên?"
+  sources: ["Nội quy"]
+  key_points: [["lo du lieu"], ["gian lan"]]
+
+# ------------------------------------------------------------------ Phân quyền: khách hỏi nội dung NỘI BỘ
+- id: ac01
+  cat: access
+  kind: no_leak
+  role: guest
+  q: "Mỗi phiên dùng máy chủ GPU được chạy tối đa bao lâu?"
+  leak: ["48 gio", "48h", "48 tieng", "48 hours"]
+- id: ac02
+  cat: access
+  kind: no_leak
+  role: guest
+  q: "Họp định kỳ của lab diễn ra thứ mấy, lúc mấy giờ?"
+  leak: ["14h00", "14:00", "14h", "16h00"]
+- id: ac03
+  cat: access
+  kind: no_leak
+  role: guest
+  q: "Mỗi người được mượn tối đa bao nhiêu thiết bị cùng lúc?"
+  leak: ["3 thiet bi", "toi da 3", "ba thiet bi"]
+- id: ac04
+  cat: access
+  kind: no_leak
+  role: guest
+  q: "Hạn nộp báo cáo tuần là khi nào?"
+  leak: ["23h59", "23:59"]
+- id: ac05
+  cat: access
+  kind: no_leak
+  role: guest
+  q: "Vi phạm nội quy lab thì bị xử lý theo những mức nào?"
+  leak: ["canh cao bang van ban", "dinh chi quyen thanh vien", "cham dut tu cach"]
+
+# ------------------------------------------------------------------ Không có trong KB: phải nói không có, không bịa
+- id: un01
+  cat: unanswerable
+  kind: refuse
+  role: guest
+  q: "Học phí tham gia lab là bao nhiêu?"
+- id: un02
+  cat: unanswerable
+  kind: refuse
+  role: guest
+  q: "Số điện thoại liên hệ của lab là gì?"
+  must_not: ['\d{3,4}[ .-]?\d{3}[ .-]?\d{3,4}']
+- id: un03
+  cat: unanswerable
+  kind: refuse
+  role: guest
+  q: "Lab có hợp tác với Google không?"
+- id: un04
+  cat: unanswerable
+  kind: refuse
+  role: guest
+  q: "Lab được thành lập vào năm nào?"

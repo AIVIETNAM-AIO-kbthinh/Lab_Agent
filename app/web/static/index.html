@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trợ lý Lab</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/common.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">●</span> <span id="lab-name">Trợ lý Lab</span></div>
+    <div class="who">
+      <span id="who-label" class="badge">Khách</span>
+      <select id="dev-role" class="dev-role" title="Chế độ dev: chọn vai trò để thử (không cần đăng nhập)" hidden>
+        <option value="guest">Khách</option>
+        <option value="member">Thành viên</option>
+        <option value="thu_ki">Thư ký</option>
+        <option value="leader">Leader</option>
+        <option value="admin">Admin</option>
+      </select>
+      <a id="admin-link" href="/admin/kb/web" hidden>Quản trị</a>
+      <a id="login-link" href="/login">Đăng nhập</a>
+      <button id="logout-btn" class="link" hidden>Đăng xuất</button>
+    </div>
+  </header>
+  <div id="test-banner" class="banner" hidden>Chế độ TEST: dữ liệu là dữ liệu thử nghiệm.</div>
+
+  <main class="chat">
+    <section id="messages" class="messages" aria-live="polite">
+      <div class="msg assistant intro">
+        <div class="bubble">Xin chào! Mình có thể giúp bạn tìm hiểu về lab: hướng nghiên cứu, dự án, tin tức,
+          cách tham gia. Thành viên đăng nhập còn hỏi được thiết bị, lịch trực, tài liệu nội bộ.</div>
+      </div>
+    </section>
+    <div id="suggestions" class="suggestions"></div>
+    <div id="attachments" class="attachments" hidden></div>
+    <form id="composer" class="composer" autocomplete="off">
+      <input id="file-input" type="file" accept=".pdf,.docx" hidden>
+      <button id="attach" type="button" class="secondary" title="Đính kèm file (PDF/DOCX, tối đa 10 MB)">📎</button>
+      <textarea id="input" rows="1" maxlength="4000" placeholder="Nhập câu hỏi…"></textarea>
+      <button id="send" type="submit">Gửi</button>
+    </form>
+    <div class="footnote"><button id="new-chat" class="link">Hội thoại mới</button>
+      · Câu trả lời do AI tạo, có thể chưa chính xác. Nội dung chat được xử lý bởi dịch vụ AI bên ngoài.</div>
+  </main>
+</body>
+</html>

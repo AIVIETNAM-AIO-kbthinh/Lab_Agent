@@ -1,0 +1,20 @@
+Subject: [{{ lab_name }}] {% if overdue %}Thiết bị đã quá hạn trả{% else %}Nhắc hạn trả thiết bị ngày mai{% endif %}
+Chào {{ name }},
+
+{% if due_tomorrow %}
+Các thiết bị sau đến hạn trả vào ngày mai ({{ tomorrow }}):
+{% for b in due_tomorrow %}
+- {{ b.ten_tb }} ({{ b.ma_tb or "?" }}) ×{{ b.so_luong }} — phiếu {{ b.ma_phieu or "(không có mã)" }} — hạn {{ b.han_tra }}
+{% endfor %}
+
+{% endif %}
+{% if overdue %}
+Các thiết bị sau đã quá hạn trả:
+{% for b in overdue %}
+- {{ b.ten_tb }} ({{ b.ma_tb or "?" }}) ×{{ b.so_luong }} — phiếu {{ b.ma_phieu or "(không có mã)" }} — hạn {{ b.han_tra }} — trễ {{ b.days_late }} ngày
+{% endfor %}
+
+{% endif %}
+Bạn vui lòng trả thiết bị cho leader hoặc báo gia hạn qua chatbot của lab.
+
+Mail tự động từ hệ thống Lab Agent.

@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: test
+      APP_CONFIG_PATH: config.example.yaml
+      APP_SECRET_KEY: ci-secret-key-not-for-production-0123456789abcdef
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - name: Lint
+        run: uv run ruff check . && uv run ruff format --check .
+      - name: Type check
+        run: uv run mypy app
+      - name: Test (Postgres + Qdrant qua testcontainers)
+        run: uv run pytest -m "not live" --cov=app --cov-report=xml
+      - name: Audit dependencies
+        run: uv run pip-audit --strict --progress-spinner off
+
+  image:
+    needs: test
+    if: github.ref == 'refs/heads/main' && hashFiles('deploy/Dockerfile') != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f deploy/Dockerfile -t labagent:${{ github.sha }} .
